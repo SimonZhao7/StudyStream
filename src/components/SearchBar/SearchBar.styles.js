@@ -21,11 +21,7 @@ export const IconContainer = styled.i`
     gap: 5px;
 
     :hover {
-        border: solid 2px gray;
-    }
-
-    :focus {
-        outline: none;
+        border: solid 2px black;
     }
 `
 
@@ -35,8 +31,4 @@ export const SearchInput = styled.input`
     padding: 5px;
     border-radius: 5px;
     border: none;
-
-    :focus {
-        outline: none;
-    }
 `

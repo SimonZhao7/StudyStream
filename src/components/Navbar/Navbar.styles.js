@@ -8,6 +8,7 @@ export const NavWrapper = styled.header`
     justify-content: space-between;
     background-color: var(--primary-color);
     padding: 10px 15px;
+    box-shadow: 1px 0 2px lightgray;
 `
 
 export const NavLinks = styled.nav`
@@ -38,6 +39,6 @@ export const LinkButton = styled.button`
     transition: background-color 0.3s ease;
 
     :hover {
-        background-color: #11749e;
+        background-color: var(--secondary-color-hover);
     }
 `

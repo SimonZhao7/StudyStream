@@ -16,7 +16,7 @@ const Navbar = () => {
             <NavLinks>
                 {/* If user is logged in show Logout and Profile Picture */}
                 <Link to='/' className='special'>Login</Link>
-                <Link to='/'><LinkButton>Register</LinkButton></Link>
+                <Link to='/register'><LinkButton>Register</LinkButton></Link>
             </NavLinks>
         </NavWrapper>
     )
