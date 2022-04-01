@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const InputWrapper = styled.div`
     display: block;
     width: ${props => props.width || '100%'};
-    margin: 15px 0;
+    margin-bottom: 15px;
 `
 
 export const InputLabel = styled.label`

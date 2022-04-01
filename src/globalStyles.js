@@ -7,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
         --secondary-color: #1dc6cc;
         --primary-color-hover: #11749e;
         --secondary-color-hover: #18b0b5;
+        --error-color: #f20000;
     }
 
     html, body, #root {

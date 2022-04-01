@@ -1,10 +1,17 @@
 import React from 'react'
-import { ButtonWrapper, ButtonContent } from './Button.styles'
+import { ButtonWrapper, ButtonContent, ButtonSpinner } from './Button.styles'
 
-const Button = ({ label, onClick, color, wrapperWidth, width }) => {
+const Button = ({ label, onClick, wrapperWidth, width, loading }) => {
     return (
         <ButtonWrapper width={wrapperWidth}>
-            <ButtonContent onClick={onClick} width={width}>{label}</ButtonContent>
+            <ButtonContent onClick={onClick} width={width} disabled={loading}>
+                {loading 
+                ? 
+                    <ButtonSpinner></ButtonSpinner>
+                : 
+                    label
+                }
+            </ButtonContent>
         </ButtonWrapper>
     )
 }

@@ -7,14 +7,14 @@ export const RegisterWrapper = styled.section`
 
     display: flex;
     justify-content: center;
+    align-items: center;
 `
 
 export const RegisterForm = styled.form`
     width: 500px;
-    height: 425px;
-    padding: 20px;
+    height: auto;
+    padding: 40px 20px;
     border-radius: 10px;
-    margin-top: 75px;
     
     display: flex;
     align-items: center;

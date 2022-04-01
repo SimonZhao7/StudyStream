@@ -11,10 +11,36 @@ export const ButtonContent = styled.button`
     border: none;
     border-radius: 5px;
     color: white;
-    background-color: ${props => props.color || 'var(--primary-color)'};
+    background-color: ${props => props.disabled ? 'var(--primary-color-hover)' : 'var(--primary-color)'};
     transition: background-color 0.3s ease;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: ${props => props.disabled ? 'auto' : 'pointer'};
 
     :hover {
         background-color: var(--primary-color-hover);
+    }
+`
+
+export const ButtonSpinner = styled.div`
+    height: 50%;
+    aspect-ratio: 1 / 1;
+    border: solid 3px white;
+    border-top: solid 3px var(--primary-color-hover);
+    border-radius: 50%;
+
+    animation: spin 1s linear infinite;
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
     }
 `
