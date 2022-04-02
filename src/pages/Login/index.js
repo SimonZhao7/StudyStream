@@ -21,12 +21,10 @@ const Login = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        const token = localStorage.getItem('jwt')
-        if (token) {
-            dispatch(login(token))
-            navigate(-1)
+        if (localStorage.getItem('jwt')) {
+            navigate('/')
         }
-    }, [dispatch, navigate])
+    }, [navigate])
 
     const handleSubmit = async (e) => {
         e.preventDefault();

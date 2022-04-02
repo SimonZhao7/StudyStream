@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../redux/features/userSlice';
+import { useSelector } from 'react-redux';
 // Styles
 import { NavWrapper, NavLinks, LinkButton, UserImg } from './Navbar.styles';
 // Components
@@ -10,17 +9,9 @@ import SearchBar from '../SearchBar';
 
 
 const Navbar = () => {
-    const dispatch = useDispatch()
     const loading = useSelector(state => state.user.loading)
     const signedIn = useSelector(state => state.user.signedIn)
-    const user = useSelector(state => state.user.value)
-
-    useEffect(() => {
-        const token = localStorage.getItem('jwt')
-        if (token) {
-            dispatch(login(token))
-        }
-    }, [dispatch])
+    const { userImage } = useSelector(state => state.user.value)
 
     return (
         <NavWrapper>
@@ -38,7 +29,7 @@ const Navbar = () => {
                 ? 
                     <>
                     <Link to='/logout'>Logout</Link>
-                    <UserImg src={user.userImage} alt='user img' />
+                    <UserImg src={userImage} alt='user img' />
                     </>
                 :
                     <>
