@@ -40,7 +40,7 @@ const CreateStudySet = () => {
                 navigate(`/edit/${id}`)
             }
         } catch (error) {
-            setErrors(error.response.data.errors)
+            setErrors(error.response.data)
         }
 
         setTimeout(() => {

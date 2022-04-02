@@ -7,6 +7,9 @@ import { MainWrapper } from '../../globalStyles'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 import Error from '../../components/Error'
+// Redux
+import { useDispatch } from 'react-redux'
+import { login } from '../../redux/features/userSlice'
 // API
 import AXIOS from '../../api'
 
@@ -14,6 +17,7 @@ const Register = () => {
     const [formData, setFormData] = useState({})
     const [errors, setErrors] = useState([])
     const [processing, setProcessing] = useState(false)
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
@@ -22,11 +26,14 @@ const Register = () => {
         try {
             const response = await AXIOS.post('/auth/register', formData)
             if (response.status === 201) {
+                const token = response.data
+                localStorage.setItem('jwt', token)
+                dispatch(login(token))
                 navigate('/')
             }
         } catch (error) {
             // Only display one error max
-            setErrors(error.response.data.errors)
+            setErrors(error.response.data)
             // Time delay just for styling
             setTimeout(() => {
                 setProcessing(false)

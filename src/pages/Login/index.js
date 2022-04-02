@@ -37,7 +37,7 @@ const Login = () => {
                 navigate('/')
             }
         } catch (error) {
-            setErrors(error.response.data.errors)
+            setErrors(error.response.data)
         }
         setTimeout(() => {
             setProcessing(false)
