@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 // Styles
 import { CreateFormWrapper, CreateForm } from './CreateStudySet.styles'
@@ -13,13 +13,18 @@ import AXIOS from '../../api'
 const CreateStudySet = () => {
     const [formData, setFormData] = useState({})
     const [processing, setProcessing] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [errors, setErrors] = useState([])
     const token = localStorage.getItem('jwt')
     let navigate = useNavigate()
 
-    if (!token) {
-        navigate('/login')
-    }
+    useEffect(() => {
+        setLoading(true)
+        if (!token) {
+            navigate('/login')
+        }
+        setLoading(false)
+    }, [navigate, token])
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -36,7 +41,7 @@ const CreateStudySet = () => {
                 }
             })
             if (response.status === 201) {
-                const { _id: id } = response.data.studySet
+                const { _id: id } = response.data
                 navigate(`/edit/${id}`)
             }
         } catch (error) {
@@ -51,14 +56,16 @@ const CreateStudySet = () => {
 
     return (
         <MainWrapper>
-            <CreateFormWrapper>
-                <CreateForm>
-                    <legend>New Study Set</legend>
-                    {errors.length > 0 && <Error error={errors[0]} />}
-                    <Input label='Title' name='title' onChange={handleChange} />
-                    <Button label='Create' loading={processing} onClick={handleSubmit} />
-                </CreateForm>
-            </CreateFormWrapper>
+            {!loading &&
+                <CreateFormWrapper>
+                    <CreateForm>
+                        <legend>New Study Set</legend>
+                        {errors.length > 0 && <Error error={errors[0]} />}
+                        <Input label='Title' name='title' onChange={handleChange} />
+                        <Button label='Create' loading={processing} onClick={handleSubmit} />
+                    </CreateForm>
+                </CreateFormWrapper>
+            }   
         </MainWrapper>
     )
 }

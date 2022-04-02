@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
@@ -21,9 +21,11 @@ const Login = () => {
     let navigate = useNavigate()
     const dispatch = useDispatch()
 
-    if (localStorage.getItem('jwt')) {
-        navigate('/')
-    }
+    useEffect(() => {
+        if (localStorage.getItem('jwt')) {
+            navigate('/')
+        }
+    }, [navigate])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -31,7 +33,7 @@ const Login = () => {
         try {
             const response = await AXIOS.post('/auth/login', formData)
             if (response.status === 200) {
-                const { token } = response.data
+                const token = response.data
                 localStorage.setItem('jwt', token)
                 dispatch(login(token))
                 navigate('/')
