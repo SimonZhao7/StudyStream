@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
+import CreateStudySet from './pages/CreateStudySet';
 
 function App() {
   const dispatch = useDispatch()
@@ -27,6 +28,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />
+        <Route path='/create' element={<CreateStudySet />} />
       </Routes>
     </Router>
   );

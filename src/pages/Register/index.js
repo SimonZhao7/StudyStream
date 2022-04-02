@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 // Styles
-import { RegisterWrapper, FormContent, RegisterForm } from './Register.styles'
+import { FormContent, RegisterForm } from './Register.styles'
+import { MainWrapper } from '../../globalStyles'
 // Components
 import Input from '../../components/Input'
 import Button from '../../components/Button'
@@ -39,7 +40,7 @@ const Register = () => {
     }
 
     return (
-        <RegisterWrapper>
+        <MainWrapper>
             <RegisterForm>
                 <FormContent>
                     <legend>Register</legend>
@@ -75,7 +76,7 @@ const Register = () => {
                     <Button label='Done!' onClick={handleSubmit} loading={processing} />
                 </FormContent>
             </RegisterForm>
-        </RegisterWrapper>
+        </MainWrapper>
     )
 }
 

@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import styled from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -24,6 +25,21 @@ const GlobalStyle = createGlobalStyle`
             outline: none;
         }
     }
+
+    legend {
+        font-size: 26px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+`
+
+export const MainWrapper = styled.main`
+    width: 100%;
+    height: calc(100% - 50px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 export default GlobalStyle

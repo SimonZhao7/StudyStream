@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../redux/features/userSlice'
 // Styles
-import { LoginWrapper, LoginForm, LoginFormWrapper } from './Login.styles'
+import { LoginForm, LoginFormWrapper } from './Login.styles'
+import { MainWrapper } from '../../globalStyles'
 // Components
 import Input from '../../components/Input'
 import Button from '../../components/Button'
@@ -20,11 +21,9 @@ const Login = () => {
     let navigate = useNavigate()
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        if (localStorage.getItem('jwt')) {
-            navigate('/')
-        }
-    }, [navigate])
+    if (localStorage.getItem('jwt')) {
+        navigate('/')
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,6 +34,7 @@ const Login = () => {
                 const { token } = response.data
                 localStorage.setItem('jwt', token)
                 dispatch(login(token))
+                navigate('/')
             }
         } catch (error) {
             setErrors(error.response.data.errors)
@@ -50,7 +50,7 @@ const Login = () => {
     }
 
     return (
-        <LoginWrapper>
+        <MainWrapper>
             {!loading && 
             <LoginFormWrapper>
                 <LoginForm>
@@ -72,7 +72,7 @@ const Login = () => {
                 </LoginForm>
             </LoginFormWrapper>
             }          
-        </LoginWrapper>
+        </MainWrapper>
     )
 }
 
