@@ -19,7 +19,7 @@ const Register = () => {
         e.preventDefault()
         setProcessing(true)
         try {
-            const response = await AXIOS.post('/users/register', formData)
+            const response = await AXIOS.post('/auth/register', formData)
             if (response.status === 201) {
                 navigate('/')
             }

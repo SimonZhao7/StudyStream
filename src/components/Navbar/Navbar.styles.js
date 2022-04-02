@@ -42,3 +42,12 @@ export const LinkButton = styled.button`
         background-color: var(--secondary-color-hover);
     }
 `
+
+export const UserImg = styled.img`
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    cursor: pointer;
+`
