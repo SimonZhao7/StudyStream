@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import CreateStudySet from './pages/CreateStudySet';
+import EditStudySet from './pages/EditStudySet';
 
 function App() {
   const dispatch = useDispatch()
@@ -29,6 +30,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />
         <Route path='/create' element={<CreateStudySet />} />
+        <Route path='/edit/:id' element={<EditStudySet />} />
       </Routes>
     </Router>
   );

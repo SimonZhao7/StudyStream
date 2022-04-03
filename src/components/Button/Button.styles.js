@@ -6,12 +6,15 @@ export const ButtonWrapper = styled.div`
 `
 
 export const ButtonContent = styled.button`
-    width: ${props => props.width || '100%'};
+    width: 100%;
     height: 35px;
     border: none;
     border-radius: 5px;
     color: white;
-    background-color: ${props => props.disabled ? 'var(--primary-color-hover)' : 'var(--primary-color)'};
+    background-color: ${props => {
+        const { disabled, hoverColor, color } = props
+        return disabled ? (hoverColor || 'var(--primary-color-hover)') : (color || 'var(--primary-color)')
+    }};
     transition: background-color 0.3s ease;
 
     display: flex;
@@ -21,7 +24,7 @@ export const ButtonContent = styled.button`
     cursor: ${props => props.disabled ? 'auto' : 'pointer'};
 
     :hover {
-        background-color: var(--primary-color-hover);
+        background-color: ${props => props.hoverColor || 'var(--primary-color-hover)'};
     }
 `
 
