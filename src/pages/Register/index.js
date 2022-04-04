@@ -26,7 +26,7 @@ const Register = () => {
         try {
             const response = await AXIOS.post('/auth/register', formData)
             if (response.status === 201) {
-                const token = response.data
+                const token = response.data.token
                 localStorage.setItem('jwt', token)
                 dispatch(login(token))
                 navigate('/')

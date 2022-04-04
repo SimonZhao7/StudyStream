@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 // Styles
 import {
     EditWrapper,
@@ -7,6 +7,7 @@ import {
     TitleRow,
     ButtonsWrapper,
     StatsRow,
+    StudySetWrapper,
 } from './EditStudySet.styles'
 // Components
 import Button from '../../components/Button'
@@ -20,11 +21,12 @@ const EditStudySet = () => {
     const { title, flashcards } = useSelector(
         (state) => state.studySet.studySet
     )
+    const token = localStorage.getItem('jwt')
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (!localStorage.getItem('jwt')) {
+        if (!token) {
             navigate('/login')
         }
         dispatch(fetchStudySet(id))
@@ -33,25 +35,40 @@ const EditStudySet = () => {
     return (
         <EditWrapper>
             {!loading && (
-                <StudySetInfo>
-                    <TitleRow>
-                        <h1>{title}</h1>
-                        <ButtonsWrapper>
-                            <Button label='Change Title' />
+                <>
+                    {!flashcards ? (
+                        <Navigate to='/404' />
+                    ) : (
+                        <StudySetWrapper>
+                            <StudySetInfo>
+                                <TitleRow>
+                                    <h1>{title}</h1>
+                                    <ButtonsWrapper>
+                                        <Button label='Change Title' />
+                                        <Button
+                                            label='Delete'
+                                            color={'var(--error-color)'}
+                                            hoverColor={'#d40000'}
+                                        />
+                                    </ButtonsWrapper>
+                                </TitleRow>
+                                <StatsRow>
+                                    <h4>
+                                        Flashcards: {flashcards.length || 0}
+                                    </h4>
+                                </StatsRow>
+                                {flashcards.map((flashcard, key) => (
+                                    <div></div>
+                                ))}
+                            </StudySetInfo>
                             <Button
-                                label='Delete'
-                                color={'var(--error-color)'}
-                                hoverColor={'#d40000'}
+                                label='Add Flashcard'
+                                color={'var(--secondary-color)'}
+                                hoverColor={'var(--secondary-color-hover)'}
                             />
-                        </ButtonsWrapper>
-                    </TitleRow>
-                    <StatsRow>
-                        <h4>Flashcards: {flashcards.length || 0}</h4>
-                    </StatsRow>
-                    {flashcards.map((flashcard, key) => (
-                        <div></div>
-                    ))}
-                </StudySetInfo>
+                        </StudySetWrapper>
+                    )}
+                </>
             )}
         </EditWrapper>
     )

@@ -6,10 +6,19 @@ export const EditWrapper = styled(MainWrapper)`
     padding: 20px;
 `
 
+export const StudySetWrapper = styled.section`
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 15px;
+    width: 60%;
+`
+
 export const StudySetInfo = styled.section`
+    box-sizing: border-box;
     background-color: white;
     color: black;
-    width: 800px;
+    width: 100%;
     max-height: 300px;
     border-radius: 10px;
     padding: 20px;

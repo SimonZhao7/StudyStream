@@ -33,7 +33,7 @@ const Login = () => {
         try {
             const response = await AXIOS.post('/auth/login', formData)
             if (response.status === 200) {
-                const token = response.data
+                const token = response.data.token
                 localStorage.setItem('jwt', token)
                 dispatch(login(token))
                 navigate('/')
