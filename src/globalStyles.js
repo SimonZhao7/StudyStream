@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
     * {
+        box-sizing: border-box;
         font-family: 'Poppins', sans-serif;
         --primary-color: #1690c4;
         --secondary-color: #1dc6cc;
@@ -13,12 +14,11 @@ const GlobalStyle = createGlobalStyle`
     }
 
     html, body, #root {
-        box-sizing: border-box;
         margin: 0;
         padding: 0;
         color: white;
         background-color: var(--primary-color);
-        height: auto;
+        height: 100%;
     }
 
     input {
@@ -35,7 +35,6 @@ const GlobalStyle = createGlobalStyle`
 `
 
 export const MainWrapper = styled.main`
-    box-sizing: border-box;
     width: 100%;
     height: 100%;
     padding-top: 70px;
@@ -43,6 +42,8 @@ export const MainWrapper = styled.main`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    overflow-y: scroll;
 `
 
 export default GlobalStyle

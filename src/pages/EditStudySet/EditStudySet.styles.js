@@ -15,7 +15,6 @@ export const StudySetWrapper = styled.section`
 `
 
 export const StudySetInfo = styled.section`
-    box-sizing: border-box;
     background-color: white;
     color: black;
     width: 100%;
@@ -50,7 +49,6 @@ export const FlashcardsWrapper = styled.section`
 `
 
 export const LineBreak = styled.hr`
-    box-sizing: border-box;
     width: 100%;
     border: 2px solid var(--secondary-color);
     border-radius: 2px;

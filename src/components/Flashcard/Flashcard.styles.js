@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const FlashcardWrapper = styled.div`
     display: flex;
-    box-sizing: border-box;
     background-color: white;
     width: 100%;
     padding: 20px 20px 20px 0;
@@ -22,7 +21,6 @@ export const NumberingWrapper = styled.div`
 `
 
 export const InfoWrapper = styled.div`
-    box-sizing: border-box;
     flex: 18;
     display: flex;
     flex-direction: column;

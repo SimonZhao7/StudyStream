@@ -17,7 +17,6 @@ export const InputBar = styled.input`
     width: 100%;
     height: 35px;
     padding: 10px;
-    box-sizing: border-box;
     border-radius: 5px;
     border: 2px solid lightgray;   
     transition: border-color 0.3s ease;

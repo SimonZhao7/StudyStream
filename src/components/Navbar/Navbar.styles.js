@@ -2,13 +2,16 @@ import styled from 'styled-components';
 
 
 export const NavWrapper = styled.header`
-    height: 30px;
+    width: 100%;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: var(--primary-color);
     padding: 10px 15px;
     box-shadow: 1px 0 2px lightgray;
+    position: fixed;
+    top: 0;
 `
 
 export const NavLinks = styled.nav`

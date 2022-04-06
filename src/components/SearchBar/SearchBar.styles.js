@@ -10,7 +10,7 @@ export const IconContainer = styled.i`
     background-color: white;
     color: black;
     width: 300px;
-    height: 20px;
+    height: 35px;
     padding: 5px 0 5px 5px;
     border-radius: 5px;
     border: solid 2px lightgray;
@@ -27,7 +27,7 @@ export const IconContainer = styled.i`
 
 export const SearchInput = styled.input`
     width: 100%;
-    height: 20px;
+    height: 30px;
     padding: 5px;
     border-radius: 5px;
     border: none;

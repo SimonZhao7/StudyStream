@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const ErrorWrapper = styled.div`
-    box-sizing: border-box;
     width: 100%;
     border-radius: 5px;
     border-left: var(--error-color) solid 5px;
