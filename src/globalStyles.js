@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
         --primary-color-hover: #11749e;
         --secondary-color-hover: #18b0b5;
         --error-color: #f20000;
+        --error-color-hover: #d40000;
     }
 
     html, body, #root {
@@ -17,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         color: white;
         background-color: var(--primary-color);
-        height: 100%;
+        height: auto;
     }
 
     input {
@@ -34,8 +35,10 @@ const GlobalStyle = createGlobalStyle`
 `
 
 export const MainWrapper = styled.main`
+    box-sizing: border-box;
     width: 100%;
-    height: calc(100% - 50px);
+    height: 100%;
+    padding-top: 70px;
 
     display: flex;
     justify-content: center;

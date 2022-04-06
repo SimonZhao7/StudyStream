@@ -18,6 +18,8 @@ export const fetchStudySet = createAsyncThunk(
 )
 const initialState = {
     loading: true,
+    flashcardFormOpen: false,
+    editable: true,
     studySet: {},
 }
 
@@ -25,14 +27,23 @@ const studySetSlice = createSlice({
     name: 'studySet',
     initialState,
     reducers: {
-        
+        showFlashcardForm: (state) => {
+            state.flashcardFormOpen = true
+        },
+        hideFlashcardForm: (state) => {
+            state.flashcardFormOpen = false
+        },
+        addFlashcard: (state, action) => {
+            state.studySet.flashcards.push(action.payload)
+        }
     },
     extraReducers: {
         [fetchStudySet.pending]: (state) => {
             state.loading = true
         },
         [fetchStudySet.fulfilled]: (state, action) => {
-            state.studySet = action.payload
+            state.studySet = action.payload.studySet
+            state.editable = action.payload.editable
             state.loading = false
         },
         [fetchStudySet.rejected]: (state) => {
@@ -41,4 +52,5 @@ const studySetSlice = createSlice({
     }
 })
 
+export const { showFlashcardForm, hideFlashcardForm, addFlashcard } = studySetSlice.actions
 export default studySetSlice.reducer

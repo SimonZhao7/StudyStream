@@ -3,7 +3,7 @@ import { MainWrapper } from '../../globalStyles'
 
 export const EditWrapper = styled(MainWrapper)`
     align-items: flex-start;
-    padding: 20px;
+    padding: 70px 20px 20px 20px;
 `
 
 export const StudySetWrapper = styled.section`
@@ -40,4 +40,18 @@ export const TitleRow = styled.div`
 
 export const StatsRow = styled.div`
     display: flex;
+`
+
+export const FlashcardsWrapper = styled.section`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+`
+
+export const LineBreak = styled.hr`
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid var(--secondary-color);
+    border-radius: 2px;
 `
