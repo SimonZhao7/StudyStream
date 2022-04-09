@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 // API
 import AXIOS from '../../api'
 
@@ -35,7 +35,10 @@ const studySetSlice = createSlice({
         },
         addFlashcard: (state, action) => {
             state.studySet.flashcards.push(action.payload)
-        }
+        },
+        removeFlashcard: (state, action) => {
+            state.studySet.flashcards.splice(action.payload, 1)
+        },
     },
     extraReducers: {
         [fetchStudySet.pending]: (state) => {
@@ -49,8 +52,14 @@ const studySetSlice = createSlice({
         [fetchStudySet.rejected]: (state) => {
             state.loading = false
         },
-    }
+    },
 })
 
-export const { showFlashcardForm, hideFlashcardForm, addFlashcard } = studySetSlice.actions
+export const {
+    showFlashcardForm,
+    hideFlashcardForm,
+    addFlashcard,
+    removeFlashcard,
+} = studySetSlice.actions
+
 export default studySetSlice.reducer

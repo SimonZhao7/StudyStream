@@ -1,4 +1,6 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+// Styles
 import {
     FlashcardWrapper,
     NumberingWrapper,
@@ -7,10 +9,37 @@ import {
     QuestionWrapper,
     AnswerWrapper,
 } from './Flashcard.styles'
+// Redux
+import { useDispatch } from 'react-redux'
+import { removeFlashcard } from '../../redux/features/studySetSlice'
+// Components
 import Button from '../Button'
+// API
+import AXIOS from '../../api'
 
 const Flashcard = ({ flashcard, index }) => {
-    const { question, answer } = flashcard
+    const { question, answer, _id: id } = flashcard
+    const token = localStorage.getItem('jwt')
+    const dispatch = useDispatch()
+    let navigate = useNavigate()
+
+    const handleDelete = async () => {
+        try {
+            const response = await AXIOS.delete(`/flashcards/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            if (response.status === 200) {
+                dispatch(removeFlashcard(index - 1))
+            }
+        } catch (error) {
+            // Only happens on 404 or 401 error which shouldn't happen if user is authenticated
+            navigate('/login')
+        }
+    }
+    
     return (
         <FlashcardWrapper>
             <NumberingWrapper>
@@ -29,6 +58,7 @@ const Flashcard = ({ flashcard, index }) => {
                     label='Delete'
                     color={'var(--error-color)'}
                     hoverColor={'var(--error-color-hover)'}
+                    onClick={handleDelete}
                 />
             </ButtonsWrapper>
         </FlashcardWrapper>
