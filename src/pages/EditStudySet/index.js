@@ -15,6 +15,7 @@ import {
 import Button from '../../components/Button'
 import FlashcardForm from '../../components/FlashcardForm'
 import Flashcard from '../../components/Flashcard'
+import FlashcardEditModal from '../../components/FlashcardEditModal'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStudySet } from '../../redux/features/studySetSlice'
@@ -24,6 +25,7 @@ const EditStudySet = () => {
     const { id } = useParams()
     const loading = useSelector((state) => state.studySet.loading)
     const editable = useSelector((state) => state.studySet.editable)
+    const editingId = useSelector((state) => state.studySet.editingId)
     const flashcardFormOpen = useSelector(
         (state) => state.studySet.flashcardFormOpen
     )
@@ -95,6 +97,7 @@ const EditStudySet = () => {
                     )}
                 </>
             )}
+            {editingId && <FlashcardEditModal />}
         </EditWrapper>
     )
 }

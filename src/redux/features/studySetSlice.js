@@ -20,6 +20,7 @@ const initialState = {
     loading: true,
     flashcardFormOpen: false,
     editable: true,
+    editingId: null,
     studySet: {},
 }
 
@@ -39,6 +40,22 @@ const studySetSlice = createSlice({
         removeFlashcard: (state, action) => {
             state.studySet.flashcards.splice(action.payload, 1)
         },
+        openEditModal: (state, action) => {
+            state.editingId = action.payload
+        },
+        closeEditModal: (state) => {
+            state.editingId = null
+        },
+        updateFlashcard: (state, action) => {
+            const flashcards = state.studySet.flashcards
+            const updatedFlashcards = flashcards.map(flashcard => {
+                if (flashcard._id === action.payload._id) {
+                    return action.payload
+                }
+                return flashcard
+            })
+            state.studySet.flashcards = updatedFlashcards
+        }
     },
     extraReducers: {
         [fetchStudySet.pending]: (state) => {
@@ -60,6 +77,9 @@ export const {
     hideFlashcardForm,
     addFlashcard,
     removeFlashcard,
+    openEditModal,
+    closeEditModal,
+    updateFlashcard,
 } = studySetSlice.actions
 
 export default studySetSlice.reducer

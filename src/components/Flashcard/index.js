@@ -11,7 +11,7 @@ import {
 } from './Flashcard.styles'
 // Redux
 import { useDispatch } from 'react-redux'
-import { removeFlashcard } from '../../redux/features/studySetSlice'
+import { removeFlashcard, openEditModal } from '../../redux/features/studySetSlice'
 // Components
 import Button from '../Button'
 // API
@@ -27,8 +27,8 @@ const Flashcard = ({ flashcard, index }) => {
         try {
             const response = await AXIOS.delete(`/flashcards/${id}`, {
                 headers: {
-                    Authorization: `Bearer ${token}`
-                }
+                    Authorization: `Bearer ${token}`,
+                },
             })
 
             if (response.status === 200) {
@@ -39,7 +39,11 @@ const Flashcard = ({ flashcard, index }) => {
             navigate('/login')
         }
     }
-    
+
+    const handleEditClick = () => {
+        dispatch(openEditModal(id))
+    }
+
     return (
         <FlashcardWrapper>
             <NumberingWrapper>
@@ -54,6 +58,7 @@ const Flashcard = ({ flashcard, index }) => {
                 </AnswerWrapper>
             </InfoWrapper>
             <ButtonsWrapper>
+                <Button label='Edit' onClick={handleEditClick}/>
                 <Button
                     label='Delete'
                     color={'var(--error-color)'}

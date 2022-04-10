@@ -28,6 +28,9 @@ export const InfoWrapper = styled.div`
 
 export const ButtonsWrapper = styled.div`
     flex: 4;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 `
 
 export const QuestionWrapper = styled.div`
