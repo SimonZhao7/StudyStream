@@ -3,7 +3,6 @@ import { MainWrapper } from '../../globalStyles'
 
 export const EditWrapper = styled(MainWrapper)`
     align-items: flex-start;
-    padding: 70px 20px 20px 20px;
 `
 
 export const StudySetWrapper = styled.section`

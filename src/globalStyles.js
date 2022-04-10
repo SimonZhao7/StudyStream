@@ -32,12 +32,16 @@ const GlobalStyle = createGlobalStyle`
         text-align: center;
         margin-bottom: 15px;
     }
+
+    a {
+        text-decoration: none;
+    }
 `
 
 export const MainWrapper = styled.main`
     width: 100%;
     height: 100%;
-    padding-top: 70px;
+    padding: 70px 20px 20px 20px;
 
     display: flex;
     justify-content: center;

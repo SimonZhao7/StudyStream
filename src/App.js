@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Logout from './pages/Logout';
 import CreateStudySet from './pages/CreateStudySet';
 import EditStudySet from './pages/EditStudySet';
+import UserStudySets from './pages/UserStudySets';
 import NotFoundPage from './pages/404';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />
         <Route path='/create' element={<CreateStudySet />} />
+        <Route path='/my-studysets' element={<UserStudySets />} />
         <Route path='/edit/:id' element={<EditStudySet />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
