@@ -38,7 +38,11 @@ export const QuestionWrapper = styled.div`
 `
 
 export const AnswerWrapper = styled.div`
-    flex: 2;
+    flex: 1;
     word-break: break-word;
     overflow-y: scroll;
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
 `

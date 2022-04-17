@@ -12,8 +12,8 @@ export const ButtonContent = styled.button`
     border-radius: 5px;
     color: white;
     background-color: ${props => {
-        const { disabled, hoverColor, color } = props
-        return disabled ? (hoverColor || 'var(--primary-color-hover)') : (color || 'var(--primary-color)')
+        const { isDisabled, hoverColor, color } = props
+        return isDisabled ? (hoverColor || 'var(--primary-color-hover)') : (color || 'var(--primary-color)')
     }};
     transition: background-color 0.3s ease;
 
@@ -21,7 +21,7 @@ export const ButtonContent = styled.button`
     justify-content: center;
     align-items: center;
 
-    cursor: ${props => props.disabled ? 'auto' : 'pointer'};
+    cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
 
     :hover {
         background-color: ${props => props.hoverColor || 'var(--primary-color-hover)'};
