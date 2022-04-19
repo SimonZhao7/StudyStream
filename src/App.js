@@ -13,6 +13,7 @@ import Logout from './pages/Logout';
 import CreateStudySet from './pages/CreateStudySet';
 import EditStudySet from './pages/EditStudySet';
 import UserStudySets from './pages/UserStudySets';
+import StudyFlashcards from './pages/StudyFlashcards';
 import NotFoundPage from './pages/404';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path='/create' element={<CreateStudySet />} />
         <Route path='/my-studysets' element={<UserStudySets />} />
         <Route path='/edit/:id' element={<EditStudySet />} />
+        <Route path='/study/:id' element={<StudyFlashcards />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </Router>
