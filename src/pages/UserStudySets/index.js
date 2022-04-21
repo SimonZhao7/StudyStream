@@ -17,7 +17,9 @@ const UserStudySets = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(fetchStudySets(`?user=${userId}&page=${page}&sort=-createdAt`))
+        if (userId) {
+            dispatch(fetchStudySets(`?user=${userId}&page=${page}&sort=-createdAt`))
+        }
     }, [dispatch, userId, page])
 
     return (

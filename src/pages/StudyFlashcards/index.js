@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 // Styles
 import {
     VMainWrapper,
@@ -18,6 +18,7 @@ import Button from '../../components/Button'
 const StudyFlashcards = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const { flashcards } = useSelector((state) => state.studySet.studySet)
     const loading = useSelector((state) => state.studySet.loading)
@@ -30,44 +31,65 @@ const StudyFlashcards = () => {
 
     return (
         <VMainWrapper>
-            {!loading && (
-                <>
-                    <FlashcardWrapper>
-                        <Flashcard className={`${flipped ? 'flipped' : null}`} onClick={() => setFlipped(prev => !prev)}>
-                            <QuestionWrapper>
-                                <h2>{flashcards[flashcardIndex].question}</h2>
-                            </QuestionWrapper>
-                            <AnswerWrapper>
-                                {/* Prevent answers from showing on flashcard change */}
-                                {flipped &&
-                                    <h2>{flashcards[flashcardIndex].answer}</h2>
+            {!loading &&
+                (flashcards.length > 0 ? (
+                    <>
+                        <FlashcardWrapper>
+                            <Flashcard
+                                className={`${flipped ? 'flipped' : null}`}
+                                onClick={() => setFlipped((prev) => !prev)}
+                            >
+                                <QuestionWrapper>
+                                    <h2>
+                                        {flashcards[flashcardIndex].question}
+                                    </h2>
+                                </QuestionWrapper>
+                                <AnswerWrapper>
+                                    {/* Prevent answers from showing on flashcard change */}
+                                    {flipped && (
+                                        <h2>
+                                            {flashcards[flashcardIndex].answer}
+                                        </h2>
+                                    )}
+                                </AnswerWrapper>
+                            </Flashcard>
+                        </FlashcardWrapper>
+                        <FlashcardNav>
+                            <Button
+                                label='<'
+                                onClick={() => {
+                                    setFlashcardIndex((prev) => prev - 1)
+                                    setFlipped(false)
+                                }}
+                                isDisabled={flashcardIndex <= 0}
+                            />
+                            <h3>
+                                {flashcardIndex + 1} of {flashcards.length}
+                            </h3>
+                            <Button
+                                label='>'
+                                onClick={() => {
+                                    setFlashcardIndex((prev) => prev + 1)
+                                    setFlipped(false)
+                                }}
+                                isDisabled={
+                                    flashcardIndex >= flashcards.length - 1
                                 }
-                            </AnswerWrapper>
-                        </Flashcard>
-                    </FlashcardWrapper>
-                    <FlashcardNav>
+                            />
+                        </FlashcardNav>
+                    </>
+                ) : (
+                    <>
+                        <h1>This study set has no flashcards...</h1>
                         <Button
-                            label='<'
-                            onClick={() => {
-                                setFlashcardIndex((prev) => prev - 1)
-                                setFlipped(false)
-                            }}
-                            isDisabled={flashcardIndex <= 0}
+                            label='Return'
+                            color={'var(--secondary-color)'}
+                            hoverColor={'var(--secondary-color-hover)'}
+                            width={'15%'}
+                            onClick={() => navigate(-1)}
                         />
-                        <h3>
-                            {flashcardIndex + 1} of {flashcards.length}
-                        </h3>
-                        <Button
-                            label='>'
-                            onClick={() => {
-                                setFlashcardIndex((prev) => prev + 1)
-                                setFlipped(false)
-                            }}
-                            isDisabled={flashcardIndex >= flashcards.length - 1}
-                        />
-                    </FlashcardNav>
-                </>
-            )}
+                    </>
+                ))}
         </VMainWrapper>
     )
 }

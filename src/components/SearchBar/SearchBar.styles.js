@@ -32,3 +32,15 @@ export const SearchInput = styled.input`
     border-radius: 5px;
     border: none;
 `
+
+export const ResultWrapper = styled.div`
+    background-color: white;
+    border-radius: 5px;
+    position: absolute;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+
+    button, h2 {
+        color: black;
+        text-align: center;
+    }
+`
