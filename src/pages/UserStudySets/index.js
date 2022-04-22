@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchStudySets } from '../../redux/features/studySetsSlice'
+import { fetchStudySets, goToPage } from '../../redux/features/studySetsSlice'
 // Components
 import StudySet from '../../components/StudySet'
 import PaginateNav from '../../components/PaginateNav'
@@ -14,6 +14,7 @@ const UserStudySets = () => {
     const loading = useSelector((state) => state.studySets.loading)
     const studySets = useSelector((state) => state.studySets.value)
     const page = useSelector((state) => state.studySets.page)
+    const maxPages = useSelector((state) => state.studySets.maxPages)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -28,9 +29,12 @@ const UserStudySets = () => {
                 {!loading &&
                     studySets.map((studySet, index) => (
                         <StudySet key={index} studySet={studySet} />
-                    )
-                )}
-                <PaginateNav />
+                    ))}
+                <PaginateNav
+                    page={page}
+                    maxPages={maxPages}
+                    pageChangeMethod={goToPage}
+                />
             </ListWrapper>
         </MainWrapper>
     )

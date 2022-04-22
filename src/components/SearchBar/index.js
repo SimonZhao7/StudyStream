@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 // Styles
 import {
     SearchForm,
@@ -20,6 +20,7 @@ const SearchBar = () => {
     const searchInput = useRef()
     const results = useRef()
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const matchInput = () => {
         const { left, right, bottom } =
@@ -27,6 +28,12 @@ const SearchBar = () => {
         results.current.style.left = `${left}px`
         results.current.style.top = `${bottom + 10}px`
         results.current.style.width = `${right - left}px`
+    }
+
+    const clearResults = () => {
+        setShowResults(false)
+        setSearchTerm('')
+        dispatch(clearResults())
     }
 
     useEffect(() => {
@@ -52,34 +59,51 @@ const SearchBar = () => {
         }
     }, [searchTerm, dispatch, showResults])
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (searchTerm) {
+            navigate(`/results/?search=${searchTerm}`)
+            clearResults()
+        }
+    }
+
     return (
-        <SearchForm ref={searchInput}>
-            <IconContainer className='fa-solid fa-magnifying-glass'>
-                <SearchInput
-                    placeholder='Search Study Sets'
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    onClick={() => setShowResults(true)}
-                />
-            </IconContainer>
+        <>
+            <SearchForm ref={searchInput} onSubmit={handleSubmit}>
+                <IconContainer className='fa-solid fa-magnifying-glass'>
+                    <SearchInput
+                        placeholder='Search Study Sets'
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onClick={() => setShowResults(true)}
+                    />
+                </IconContainer>
+            </SearchForm>
             {showResults && (
                 <ResultWrapper ref={results}>
-                    {searchResults.length > 0 ? searchResults.slice(0, 5).map((result, index) => {
-                        const { title, _id: id } = result
-                        return (
-                            <Link to={`/study/${id}`} key={index}>
-                                <Button
-                                    label={title}
-                                    color={'white'}
-                                    hoverColor={'#f5f5f5'}
-                                />
-                            </Link>
-                        )
-                    }) : (
+                    {searchResults.length > 0 ? (
+                        searchResults.slice(0, 5).map((result, index) => {
+                            const { title, _id: id } = result
+                            return (
+                                <Link
+                                    to={`/study/${id}`}
+                                    key={index}
+                                    onClick={clearResults}
+                                >
+                                    <Button
+                                        label={title}
+                                        color={'white'}
+                                        hoverColor={'#f5f5f5'}
+                                    />
+                                </Link>
+                            )
+                        })
+                    ) : (
                         <h2>No Results...</h2>
                     )}
                 </ResultWrapper>
             )}
-        </SearchForm>
+        </>
     )
 }
 

@@ -14,6 +14,7 @@ import CreateStudySet from './pages/CreateStudySet';
 import EditStudySet from './pages/EditStudySet';
 import UserStudySets from './pages/UserStudySets';
 import StudyFlashcards from './pages/StudyFlashcards';
+import SearchResults from './pages/SearchResults';
 import NotFoundPage from './pages/404';
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path='/my-studysets' element={<UserStudySets />} />
         <Route path='/edit/:id' element={<EditStudySet />} />
         <Route path='/study/:id' element={<StudyFlashcards />} />
+        <Route path='/results/*' element={<SearchResults />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </Router>

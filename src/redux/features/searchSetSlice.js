@@ -13,7 +13,6 @@ export const fetchSearchSet = createAsyncThunk(
         })
         
         if (response.status === 200) {
-            console.log(response.data)
             return response.data
         }
     }
@@ -32,6 +31,9 @@ const searchSetSlice = createSlice({
     reducer: {
         goToPage: (state, action) => {
             state.page = action.payload
+        },
+        clearResults: (state) => {
+            state = initialState
         }
     },
     extraReducers: {
