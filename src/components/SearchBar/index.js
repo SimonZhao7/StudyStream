@@ -28,6 +28,7 @@ const SearchBar = () => {
         results.current.style.left = `${left}px`
         results.current.style.top = `${bottom + 10}px`
         results.current.style.width = `${right - left}px`
+        results.current.style.display = 'block'
     }
 
     const clearResults = () => {

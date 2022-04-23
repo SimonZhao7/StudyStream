@@ -12,6 +12,7 @@ export const NavWrapper = styled.header`
     box-shadow: 1px 0 2px lightgray;
     position: fixed;
     top: 0;
+    z-index: 10;
 `
 
 export const NavLinks = styled.nav`
