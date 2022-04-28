@@ -38,11 +38,13 @@ const GlobalStyle = createGlobalStyle`
     }
 `
 
-export const MainWrapper = styled.main`
+export const BaseWrapper = styled.main`
     width: 100%;
     height: 100%;
     padding: 70px 20px 20px 20px;
+`
 
+export const MainWrapper = styled(BaseWrapper)`
     display: flex;
     justify-content: center;
     align-items: center;
