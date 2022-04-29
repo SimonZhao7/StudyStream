@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 // Styles
 import { BaseWrapper } from '../../globalStyles'
 import { StudySetsWrapper } from './Home.styles'
@@ -14,11 +15,15 @@ const Home = () => {
     )
     const loading = useSelector((state) => state.user.loading)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const token = localStorage.getItem('jwt')
 
     useEffect(() => {
+        if (!token) {
+            navigate('/login')
+        }
         dispatch(login(token))
-    }, [dispatch, token])
+    }, [dispatch, token, navigate])
 
     return (
         <BaseWrapper>
@@ -34,7 +39,7 @@ const Home = () => {
                         </p>
                     )}
                     <StudySetsWrapper>
-                        {recentlyViewedSets.map((studySet, index) => (
+                        {[...recentlyViewedSets].reverse().map((studySet, index) => (
                             <StudySet studySet={studySet} key={index} />
                         ))}
                         {recentlyViewedSets.length % 3 !== 0 &&
