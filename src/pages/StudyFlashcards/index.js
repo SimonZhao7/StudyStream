@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 // Styles
 import {
@@ -24,20 +24,52 @@ const StudyFlashcards = () => {
     const loading = useSelector((state) => state.studySet.loading)
     const [flipped, setFlipped] = useState(false)
     const [flashcardIndex, setFlashcardIndex] = useState(0)
+    const flashcard = useRef()
+    const [canFlip, setCanFlip] = useState(true)
+
+    const handleFlip = () => {
+        if (canFlip) {
+            setCanFlip(false)
+            setFlipped((prev) => !prev)
+            setTimeout(() => {
+                setCanFlip(true)
+            }, 500)
+        }
+    }
+
+    const handleFlashcardScroll = (flashcardNum) => {
+        setFlashcardIndex(flashcardNum)
+        setFlipped(false)
+    }
+
+    const handleKeyPress = (e) => {
+        if (e.code === 'Space') {
+            handleFlip()
+        } else if (e.code === 'ArrowRight' && flashcardIndex < flashcards.length - 1) {
+            handleFlashcardScroll(flashcardIndex + 1)
+        } else if (e.code === 'ArrowLeft' && flashcardIndex > 0) {
+            handleFlashcardScroll(flashcardIndex - 1)
+        }
+    }
 
     useEffect(() => {
         dispatch(fetchStudySet(id))
     }, [dispatch, id])
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyPress)
+        return () => window.removeEventListener('keydown', handleKeyPress)
+    })
 
     return (
         <VMainWrapper>
             {!loading &&
                 (flashcards.length > 0 ? (
                     <>
-                        <FlashcardWrapper>
+                        <FlashcardWrapper ref={flashcard}>
                             <Flashcard
                                 className={`${flipped ? 'flipped' : null}`}
-                                onClick={() => setFlipped((prev) => !prev)}
+                                onClick={handleFlip}
                             >
                                 <QuestionWrapper>
                                     <h2>
@@ -57,10 +89,7 @@ const StudyFlashcards = () => {
                         <FlashcardNav>
                             <Button
                                 label='<'
-                                onClick={() => {
-                                    setFlashcardIndex((prev) => prev - 1)
-                                    setFlipped(false)
-                                }}
+                                onClick={() => handleFlashcardScroll(flashcardIndex - 1)}
                                 isDisabled={flashcardIndex <= 0}
                             />
                             <h3>
@@ -68,10 +97,7 @@ const StudyFlashcards = () => {
                             </h3>
                             <Button
                                 label='>'
-                                onClick={() => {
-                                    setFlashcardIndex((prev) => prev + 1)
-                                    setFlipped(false)
-                                }}
+                                onClick={() => handleFlashcardScroll(flashcardIndex + 1)}
                                 isDisabled={
                                     flashcardIndex >= flashcards.length - 1
                                 }
