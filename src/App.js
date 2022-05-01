@@ -16,6 +16,8 @@ import UserStudySets from './pages/UserStudySets';
 import StudyFlashcards from './pages/StudyFlashcards';
 import SearchResults from './pages/SearchResults';
 import NotFoundPage from './pages/404';
+import APIConnect from './pages/APIConnect';
+import APICallback from './pages/APICallback';
 
 function App() {
   const dispatch = useDispatch()
@@ -38,6 +40,8 @@ function App() {
         <Route path='/edit/:id' element={<EditStudySet />} />
         <Route path='/study/:id' element={<StudyFlashcards />} />
         <Route path='/results/*' element={<SearchResults />} />
+        <Route path='/connect' element={<APIConnect />} />
+        <Route path='/api/callback' element={<APICallback />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </Router>
