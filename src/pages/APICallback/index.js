@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Buffer } from 'buffer'
+// Redux
+import { useSelector } from 'react-redux'
 // API
 import axios from 'axios'
+import AXIOS from '../../api'
 // Styles
 import { MainWrapper } from '../../globalStyles'
 
 const APICallback = () => {
     const searchParams = useSearchParams()[0]
+    const { _id } = useSelector((state) => state.user.value)
     useEffect(() => {
         const handleResponse = async () => {
             const params = new URLSearchParams()
@@ -30,8 +34,15 @@ const APICallback = () => {
                     }
                 )
                 if (response.status === 200) {
-                    const { access_token, refresh_token, expires_in } =
-                        response.data
+                    const { access_token, refresh_token, expires_in } = response.data
+                    const token = localStorage.getItem('jwt')
+
+                    await AXIOS.patch(`/users/${_id}`, { spotifyRefreshToken: refresh_token }, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    })
+
                     localStorage.setItem(
                         'spotify',
                         JSON.stringify({
@@ -47,7 +58,7 @@ const APICallback = () => {
             }
         }
         handleResponse()
-    }, [searchParams])
+    }, [searchParams, _id])
 
     return (
         <MainWrapper>

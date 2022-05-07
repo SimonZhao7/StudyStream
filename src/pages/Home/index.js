@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 // Styles
 import { BaseWrapper } from '../../globalStyles'
-import { StudySetsWrapper } from './Home.styles'
+import { StudySetsWrapper, HomeContent } from './Home.styles'
 // Components
 import StudySet from '../../components/StudySet'
 // Redux
@@ -28,31 +28,37 @@ const Home = () => {
     return (
         <BaseWrapper>
             {!loading && (
-                <>
-                    <h1 style={{ marginBottom: '50px' }}>Hello {username}!</h1>
-                    {recentlyViewedSets.length > 0 ? (
-                        <p>Here are your most recently viewed study sets!</p>
-                    ) : (
-                        <p>
-                            You have no previously viewed study sets. Get
-                            studying!!!
-                        </p>
-                    )}
-                    <StudySetsWrapper>
-                        {[...recentlyViewedSets].reverse().map((studySet, index) => (
-                            <StudySet studySet={studySet} key={index} />
-                        ))}
-                        {recentlyViewedSets.length % 3 !== 0 &&
-                        (recentlyViewedSets.length + 1) % 3 === 0 ? (
-                            <div></div>
+                <HomeContent>
+                    <h1>Hello {username}!</h1>
+                    <div style={{ marginBottom: '50px'}}>
+                        {recentlyViewedSets.length > 0 ? (
+                            <p>
+                                Here are your most recently viewed study sets!
+                            </p>
                         ) : (
-                            <>
-                                <div></div>
-                                <div></div>
-                            </>
+                            <p>
+                                You have no previously viewed study sets. Get
+                                studying!!!
+                            </p>
                         )}
-                    </StudySetsWrapper>
-                </>
+                        <StudySetsWrapper>
+                            {[...recentlyViewedSets]
+                                .reverse()
+                                .map((studySet, index) => (
+                                    <StudySet studySet={studySet} key={index} />
+                                ))}
+                            {recentlyViewedSets.length % 3 !== 0 &&
+                            (recentlyViewedSets.length + 1) % 3 === 0 ? (
+                                <div></div>
+                            ) : (
+                                <>
+                                    <div></div>
+                                    <div></div>
+                                </>
+                            )}
+                        </StudySetsWrapper>
+                    </div>
+                </HomeContent>
             )}
         </BaseWrapper>
     )

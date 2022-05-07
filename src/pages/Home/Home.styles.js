@@ -7,3 +7,10 @@ export const StudySetsWrapper = styled.section`
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     grid-gap: 15px;
 `
+
+export const HomeContent = styled.section`
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`
