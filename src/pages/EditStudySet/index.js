@@ -29,7 +29,7 @@ const EditStudySet = () => {
     const flashcardFormOpen = useSelector(
         (state) => state.studySet.flashcardFormOpen
     )
-    const { title, flashcards } = useSelector(
+    const { title, flashcards, playlistId } = useSelector(
         (state) => state.studySet.studySet
     )
     const token = localStorage.getItem('jwt')
@@ -62,6 +62,13 @@ const EditStudySet = () => {
                                             hoverColor={
                                                 'var(--error-color-hover)'
                                             }
+                                        />
+                                        <Button
+                                            label={`${
+                                                playlistId
+                                                    ? 'Edit Playlist'
+                                                    : 'Add Playlist'
+                                            }`}
                                         />
                                     </ButtonsWrapper>
                                 </TitleRow>

@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useSearchParams } from 'react-router-dom'
 import { Buffer } from 'buffer'
-// Redux
-import { useSelector } from 'react-redux'
 // API
 import axios from 'axios'
 import AXIOS from '../../api'
@@ -11,7 +10,9 @@ import { MainWrapper } from '../../globalStyles'
 
 const APICallback = () => {
     const searchParams = useSearchParams()[0]
-    const { _id } = useSelector((state) => state.user.value)
+    const [loading, setLoading] = useState(true)
+    const navigate = useNavigate()
+
     useEffect(() => {
         const handleResponse = async () => {
             const params = new URLSearchParams()
@@ -37,7 +38,14 @@ const APICallback = () => {
                     const { access_token, refresh_token, expires_in } = response.data
                     const token = localStorage.getItem('jwt')
 
-                    await AXIOS.patch(`/users/${_id}`, { spotifyRefreshToken: refresh_token }, {
+                    // Because of asyncThunk delay, we have to make this API call in the useEffect or _id would be undefined
+                    const _id = (await AXIOS.get('/users/current', {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    })).data._id
+
+                    await AXIOS.patch(`/users/${_id}`, { spotifyRefreshToken: 'broken?' }, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
@@ -53,16 +61,20 @@ const APICallback = () => {
                         })
                     )
                 }
-            } catch (error) {
-                console.log(error.response)
+            } catch (error) { // Error from accessing this route directly
+                navigate('/connect')
             }
         }
+        setLoading(true)
         handleResponse()
-    }, [searchParams, _id])
+        setLoading(false)
+    }, [searchParams, navigate])
 
     return (
         <MainWrapper>
-            <h1>You have successfully connected to your Spotify Account</h1>
+            {!loading &&
+                <h1>You have successfully connected to your Spotify Account</h1>
+            }
         </MainWrapper>
     )
 }
