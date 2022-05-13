@@ -20,6 +20,10 @@ import FlashcardEditModal from '../../components/FlashcardEditModal'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStudySet } from '../../redux/features/studySetSlice'
 import { showFlashcardForm } from '../../redux/features/studySetSlice'
+// API
+import S_AXIOS from '../../api/spotifyApi'
+// Helpers
+import { refreshToken } from '../../helpers/spotify'
 
 const EditStudySet = () => {
     const { id } = useParams()
@@ -43,6 +47,15 @@ const EditStudySet = () => {
         dispatch(fetchStudySet(id))
     }, [navigate, id, dispatch, token])
 
+    const handleAddPlaylist = () => {
+        refreshToken()
+        try {
+            S_AXIOS.post(`/users/{}/playlists`, {})
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <EditWrapper>
             {!loading && (
@@ -63,13 +76,14 @@ const EditStudySet = () => {
                                                 'var(--error-color-hover)'
                                             }
                                         />
-                                        <Button
-                                            label={`${
-                                                playlistId
-                                                    ? 'Edit Playlist'
-                                                    : 'Add Playlist'
-                                            }`}
-                                        />
+                                        {playlistId ? (
+                                            <Button label='Edit Playlist' />
+                                        ) : (
+                                            <Button
+                                                label='Add Playlist'
+                                                onClick={handleAddPlaylist}
+                                            />
+                                        )}
                                     </ButtonsWrapper>
                                 </TitleRow>
                                 <StatsRow>
@@ -104,7 +118,11 @@ const EditStudySet = () => {
                     )}
                 </>
             )}
-            {editingId && <FlashcardEditModal />}
+            {editingId && (
+                <FlashcardEditModal>
+                    <FlashcardForm />
+                </FlashcardEditModal>
+            )}
         </EditWrapper>
     )
 }

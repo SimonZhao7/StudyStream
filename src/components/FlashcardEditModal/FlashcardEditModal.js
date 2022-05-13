@@ -9,6 +9,7 @@ export const ModalWrapper = styled.section`
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 100;
 `
 
 export const FormWrapper = styled.div`

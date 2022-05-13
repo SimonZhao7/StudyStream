@@ -1,13 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 // Styles
 import { ModalWrapper, FormWrapper } from './FlashcardEditModal'
-// Components
-import FlashcardForm from '../FlashcardForm'
 // Redux
 import { useDispatch } from 'react-redux'
 import { closeEditModal } from '../../redux/features/studySetSlice'
 
-const FlashcardEditModal = () => {
+const FlashcardEditModal = ({ children }) => {
     const dispatch = useDispatch()
     const formRef = useRef()
 
@@ -26,7 +24,7 @@ const FlashcardEditModal = () => {
     return (
         <ModalWrapper>
             <FormWrapper ref={formRef}>
-                <FlashcardForm />
+                {children}
             </FormWrapper>
         </ModalWrapper>
     )

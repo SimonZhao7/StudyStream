@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 // API
-import AXIOS from '../../api'
+import AXIOS from '../../api/api'
 
 export const fetchStudySet = createAsyncThunk(
     'studySetSlice/fetchStudySet',

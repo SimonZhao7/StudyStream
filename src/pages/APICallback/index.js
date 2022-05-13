@@ -4,9 +4,10 @@ import { useSearchParams } from 'react-router-dom'
 import { Buffer } from 'buffer'
 // API
 import axios from 'axios'
-import AXIOS from '../../api'
+import AXIOS from '../../api/api'
 // Styles
 import { MainWrapper } from '../../globalStyles'
+import S_AXIOS from '../../api/spotifyApi'
 
 const APICallback = () => {
     const searchParams = useSearchParams()[0]
@@ -45,24 +46,32 @@ const APICallback = () => {
                         }
                     })).data._id
 
-                    await AXIOS.patch(`/users/${_id}`, { spotifyRefreshToken: 'broken?' }, {
+                    await AXIOS.patch(`/users/${_id}`, { spotifyRefreshToken: refresh_token }, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
                     })
 
+                    const spotifyId = (await S_AXIOS.get('/me', {
+                        headers: {
+                            Authorization: `Bearer ${access_token}`
+                        }
+                    })).data.id
+                    
                     localStorage.setItem(
                         'spotify',
                         JSON.stringify({
                             refresh_token,
                             access_token,
+                            spotifyId,
                             expires_in_ms: expires_in * 1000,
                             dateAccessed: new Date(),
                         })
                     )
                 }
             } catch (error) { // Error from accessing this route directly
-                navigate('/connect')
+                // navigate('/connect')
+                console.log(error)
             }
         }
         setLoading(true)

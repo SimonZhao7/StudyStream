@@ -15,7 +15,7 @@ import {
     updateFlashcard,
 } from '../../redux/features/studySetSlice'
 // API
-import AXIOS from '../../api'
+import AXIOS from '../../api/api'
 
 const FlashcardForm = () => {
     const { id } = useParams()
