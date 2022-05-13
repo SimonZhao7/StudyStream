@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 // API
-import AXIOS from '../../api/api'
+import AXIOS from '../../api'
 
 export const fetchStudySet = createAsyncThunk(
     'studySetSlice/fetchStudySet',
@@ -19,6 +19,7 @@ export const fetchStudySet = createAsyncThunk(
 const initialState = {
     loading: true,
     flashcardFormOpen: false,
+    addPlaylistModalOpen: false,
     editable: true,
     editingId: null,
     studySet: {},
@@ -43,8 +44,12 @@ const studySetSlice = createSlice({
         openEditModal: (state, action) => {
             state.editingId = action.payload
         },
-        closeEditModal: (state) => {
+        openPlaylistModal: (state) => {
+            state.addPlaylistModalOpen = true
+        },
+        closeModals: (state) => {
             state.editingId = null
+            state.addPlaylistModalOpen = false
         },
         updateFlashcard: (state, action) => {
             const flashcards = state.studySet.flashcards
@@ -78,8 +83,9 @@ export const {
     addFlashcard,
     removeFlashcard,
     openEditModal,
-    closeEditModal,
     updateFlashcard,
+    openPlaylistModal,
+    closeModals
 } = studySetSlice.actions
 
 export default studySetSlice.reducer

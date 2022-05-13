@@ -15,7 +15,7 @@ import { removeFlashcard, openEditModal } from '../../redux/features/studySetSli
 // Components
 import Button from '../Button'
 // API
-import AXIOS from '../../api/api'
+import AXIOS from '../../api'
 
 const Flashcard = ({ flashcard, index }) => {
     const { question, answer, _id: id } = flashcard

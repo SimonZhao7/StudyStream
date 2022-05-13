@@ -16,14 +16,11 @@ import Button from '../../components/Button'
 import FlashcardForm from '../../components/FlashcardForm'
 import Flashcard from '../../components/Flashcard'
 import FlashcardEditModal from '../../components/FlashcardEditModal'
+import AddPlaylistForm from '../../components/AddPlaylistForm'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchStudySet } from '../../redux/features/studySetSlice'
+import { fetchStudySet, openPlaylistModal } from '../../redux/features/studySetSlice'
 import { showFlashcardForm } from '../../redux/features/studySetSlice'
-// API
-import S_AXIOS from '../../api/spotifyApi'
-// Helpers
-import { refreshToken } from '../../helpers/spotify'
 
 const EditStudySet = () => {
     const { id } = useParams()
@@ -33,6 +30,7 @@ const EditStudySet = () => {
     const flashcardFormOpen = useSelector(
         (state) => state.studySet.flashcardFormOpen
     )
+    const addPlaylistModalOpen = useSelector((state) => state.studySet.addPlaylistModalOpen)
     const { title, flashcards, playlistId } = useSelector(
         (state) => state.studySet.studySet
     )
@@ -46,15 +44,6 @@ const EditStudySet = () => {
         }
         dispatch(fetchStudySet(id))
     }, [navigate, id, dispatch, token])
-
-    const handleAddPlaylist = () => {
-        refreshToken()
-        try {
-            S_AXIOS.post(`/users/{}/playlists`, {})
-        } catch (error) {
-            console.log(error)
-        }
-    }
 
     return (
         <EditWrapper>
@@ -81,7 +70,7 @@ const EditStudySet = () => {
                                         ) : (
                                             <Button
                                                 label='Add Playlist'
-                                                onClick={handleAddPlaylist}
+                                                onClick={() => dispatch(openPlaylistModal())}
                                             />
                                         )}
                                     </ButtonsWrapper>
@@ -121,6 +110,11 @@ const EditStudySet = () => {
             {editingId && (
                 <FlashcardEditModal>
                     <FlashcardForm />
+                </FlashcardEditModal>
+            )}
+            {addPlaylistModalOpen && (
+                <FlashcardEditModal>
+                    <AddPlaylistForm />
                 </FlashcardEditModal>
             )}
         </EditWrapper>

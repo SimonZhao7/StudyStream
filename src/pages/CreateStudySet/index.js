@@ -8,7 +8,7 @@ import Input from '../../components/Input'
 import Button from '../../components/Button'
 import Error from '../../components/Error'
 // API
-import AXIOS from '../../api/api'
+import AXIOS from '../../api'
 
 const CreateStudySet = () => {
     const [formData, setFormData] = useState({})

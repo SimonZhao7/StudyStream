@@ -11,11 +11,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
     hideFlashcardForm,
     addFlashcard,
-    closeEditModal,
+    closeModals,
     updateFlashcard,
 } from '../../redux/features/studySetSlice'
 // API
-import AXIOS from '../../api/api'
+import AXIOS from '../../api'
 
 const FlashcardForm = () => {
     const { id } = useParams()
@@ -58,7 +58,7 @@ const FlashcardForm = () => {
         }
         setTimeout(() => {
             setProcessing(false)
-            dispatch(closeEditModal())
+            dispatch(closeModals())
             return () => clearTimeout()
         }, 500)
     }

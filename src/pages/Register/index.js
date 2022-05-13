@@ -11,7 +11,7 @@ import Error from '../../components/Error'
 import { useDispatch } from 'react-redux'
 import { login } from '../../redux/features/userSlice'
 // API
-import AXIOS from '../../api/api'
+import AXIOS from '../../api'
 
 const Register = () => {
     const [formData, setFormData] = useState({})
