@@ -17,9 +17,14 @@ import FlashcardForm from '../../components/FlashcardForm'
 import Flashcard from '../../components/Flashcard'
 import FlashcardEditModal from '../../components/FlashcardEditModal'
 import AddPlaylistForm from '../../components/AddPlaylistForm'
+import EditPlaylistModal from '../../components/EditPlaylistModal'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchStudySet, openPlaylistModal } from '../../redux/features/studySetSlice'
+import {
+    fetchStudySet,
+    openPlaylistModal,
+} from '../../redux/features/studySetSlice'
+import { openEditModal } from '../../redux/features/spotifySlice'
 import { showFlashcardForm } from '../../redux/features/studySetSlice'
 
 const EditStudySet = () => {
@@ -27,10 +32,15 @@ const EditStudySet = () => {
     const loading = useSelector((state) => state.studySet.loading)
     const editable = useSelector((state) => state.studySet.editable)
     const editingId = useSelector((state) => state.studySet.editingId)
+    const editPlaylistModalOpen = useSelector(
+        (state) => state.spotify.editPlaylistModalOpen
+    )
     const flashcardFormOpen = useSelector(
         (state) => state.studySet.flashcardFormOpen
     )
-    const addPlaylistModalOpen = useSelector((state) => state.studySet.addPlaylistModalOpen)
+    const addPlaylistModalOpen = useSelector(
+        (state) => state.studySet.addPlaylistModalOpen
+    )
     const { title, flashcards, playlistId } = useSelector(
         (state) => state.studySet.studySet
     )
@@ -66,11 +76,20 @@ const EditStudySet = () => {
                                             }
                                         />
                                         {playlistId ? (
-                                            <Button label='Edit Playlist' />
+                                            <Button
+                                                label='Edit Playlist'
+                                                onClick={() =>
+                                                    dispatch(openEditModal())
+                                                }
+                                            />
                                         ) : (
                                             <Button
                                                 label='Add Playlist'
-                                                onClick={() => dispatch(openPlaylistModal())}
+                                                onClick={() =>
+                                                    dispatch(
+                                                        openPlaylistModal()
+                                                    )
+                                                }
                                             />
                                         )}
                                     </ButtonsWrapper>
@@ -115,6 +134,11 @@ const EditStudySet = () => {
             {addPlaylistModalOpen && (
                 <FlashcardEditModal>
                     <AddPlaylistForm />
+                </FlashcardEditModal>
+            )}
+            {editPlaylistModalOpen && (
+                <FlashcardEditModal>
+                    <EditPlaylistModal />
                 </FlashcardEditModal>
             )}
         </EditWrapper>

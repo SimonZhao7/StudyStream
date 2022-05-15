@@ -4,6 +4,7 @@ import { ModalWrapper, FormWrapper } from './FlashcardEditModal'
 // Redux
 import { useDispatch } from 'react-redux'
 import { closeModals } from '../../redux/features/studySetSlice'
+import { closeModals as spotifyCloseModals } from '../../redux/features/spotifySlice'
 
 const FlashcardEditModal = ({ children }) => {
     const dispatch = useDispatch()
@@ -13,6 +14,7 @@ const FlashcardEditModal = ({ children }) => {
         const handleClick = (e) => {
             if (!formRef.current.contains(e.target)) {
                 dispatch(closeModals())
+                dispatch(spotifyCloseModals())
             }
         }
         window.addEventListener('click', handleClick)

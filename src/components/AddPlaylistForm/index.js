@@ -43,6 +43,7 @@ const AddPlaylistForm = () => {
             )
 
             if (response.status === 201) {
+                localStorage.setItem('spotify', JSON.stringify(response.data.spotifyData))
                 dispatch(closeModals())
                 dispatch(fetchStudySet(studySetId))
             }
