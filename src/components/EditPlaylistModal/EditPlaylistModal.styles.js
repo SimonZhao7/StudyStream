@@ -17,4 +17,5 @@ export const Songs = styled.section`
 
 export const YourSongs = styled.section`
     flex: 1;
+    overflow-y: scroll;
 `
