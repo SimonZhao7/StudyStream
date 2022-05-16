@@ -9,6 +9,11 @@ export const EditWrapper = styled.section`
     border-radius: 5px;
     display: flex;
     gap: 10px;
+
+    h2 {
+        margin: 0;
+        padding: 15px 0
+    }
 `
 
 export const Songs = styled.section`

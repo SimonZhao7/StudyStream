@@ -18,7 +18,7 @@ const Song = ({ song, type }) => {
             <SongData>
                 <h3>{name}</h3>
                 <p>
-                    By:{' '}
+                    By:
                     {artists
                         .reduce(
                             (prevValue, currentValue) =>

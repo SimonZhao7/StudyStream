@@ -4,17 +4,21 @@ import AXIOS from '../../api'
 const initialState = {
     editPlaylistModalOpen: false,
     playlistSongs: [],
+    maxPages: 1,
+    page: 1,
 }
 
 export const fetchPlaylistSongs = createAsyncThunk(
     'spotify/fetchPlaylistSongs',
-    async (studySetId) => {
+    async (body) => {
+        const { studySetId, page } = body
         const token = localStorage.getItem('jwt')
         const spotifyData = localStorage.getItem('spotify')
         const response = await AXIOS.get('/spotify/playlists', {
             params: {
                 studySetId,
                 spotifyData,
+                page
             },
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -59,13 +63,17 @@ const spotifySlice = createSlice({
         closeModals: (state) => {
             state.editPlaylistModalOpen = false
         },
+        goToPage: (state, action) => {
+            state.page = action.payload
+        },
     },
     extraReducers: {
         [fetchPlaylistSongs.fulfilled]: (state, action) => {
-            const { spotifyData, tracks } = action.payload
+            const { spotifyData, tracks, maxPages } = action.payload
             localStorage.setItem('spotify', JSON.stringify(spotifyData))
             state.playlistSongs = tracks
             state.isFetchSuccessful = true
+            state.maxPages = maxPages
         },
         [fetchPlaylistSongs.rejected]: () => {
             window.location.href = '/connect'
@@ -85,6 +93,6 @@ const spotifySlice = createSlice({
     },
 })
 
-export const { openEditModal, closeModals } = spotifySlice.actions
+export const { openEditModal, closeModals, goToPage } = spotifySlice.actions
 
 export default spotifySlice.reducer
