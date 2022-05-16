@@ -14,7 +14,7 @@ const EditPlaylistModal = () => {
 
     useEffect(() => {
         dispatch(fetchPlaylistSongs(_id)) 
-    }, [_id, dispatch, navigate])
+    }, [_id, dispatch])
 
     return (
         <EditWrapper>

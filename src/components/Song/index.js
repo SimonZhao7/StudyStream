@@ -35,7 +35,7 @@ const Song = ({ song, type }) => {
                         onClick={() =>
                             dispatch(
                                 removeFromPlaylist({
-                                    tracks: JSON.stringify([{ uri }]),
+                                    tracks: [{ uri }],
                                     studySetId,
                                 })
                             )

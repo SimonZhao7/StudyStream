@@ -31,10 +31,10 @@ export const removeFromPlaylist = createAsyncThunk(
     'spotify/removeFromPlaylist',
     async (body) => {
         const token = localStorage.getItem('jwt')
-        const spotifyData = localStorage.getItem('spotify')
+        const spotifyData = JSON.parse(localStorage.getItem('spotify'))
 
         const response = await AXIOS.delete(`/spotify/playlists`, {
-            params: {
+            data: {
                 ...body,
                 spotifyData,
             },
