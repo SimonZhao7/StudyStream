@@ -8,7 +8,7 @@ export const EditWrapper = styled.section`
     color: black;
     border-radius: 5px;
     display: flex;
-    gap: 10px;
+    gap: 20px;
 
     h2 {
         margin: 0;
@@ -18,6 +18,7 @@ export const EditWrapper = styled.section`
 
 export const Songs = styled.section`
     flex: 1;
+    overflow-y: scroll;
 `
 
 export const YourSongs = styled.section`

@@ -4,6 +4,7 @@ import studySetReducer from './features/studySetSlice'
 import studySetsReducer from './features/studySetsSlice'
 import searchSetReducer from './features/searchSetSlice'
 import spotifyReducer from './features/spotifySlice'
+import spotifySearchReducer from './features/spotifySearchSlice'
 
 const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
         studySets: studySetsReducer,
         searchSet: searchSetReducer,
         spotify: spotifyReducer,
+        spotifySearch: spotifySearchReducer,
     },
 })
 

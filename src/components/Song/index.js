@@ -9,7 +9,7 @@ import { AiFillDelete } from 'react-icons/ai'
 import { IoMdAdd } from 'react-icons/io'
 
 const Song = ({ song, type }) => {
-    const { artists, name, uri } = song.track
+    const { artists, name, uri } = song
     const { _id: studySetId } = useSelector((state) => state.studySet.studySet)
     const dispatch = useDispatch()
 
@@ -18,7 +18,7 @@ const Song = ({ song, type }) => {
             <SongData>
                 <h3>{name}</h3>
                 <p>
-                    By:
+                    By:{' '}
                     {artists
                         .reduce(
                             (prevValue, currentValue) =>
