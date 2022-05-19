@@ -3,7 +3,10 @@ import React from 'react'
 import { SongWrapper, SongData, ButtonWrapper, Button } from './Song.styles'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { removeFromPlaylist } from '../../redux/features/spotifySlice'
+import {
+    removeFromPlaylist,
+    addToPlaylist,
+} from '../../redux/features/spotifySlice'
 // Icons
 import { AiFillDelete } from 'react-icons/ai'
 import { IoMdAdd } from 'react-icons/io'
@@ -35,7 +38,7 @@ const Song = ({ song, type }) => {
                         onClick={() =>
                             dispatch(
                                 removeFromPlaylist({
-                                    tracks: [{ uri }],
+                                    track: { uri },
                                     studySetId,
                                 })
                             )
@@ -44,7 +47,17 @@ const Song = ({ song, type }) => {
                         <AiFillDelete color='white' size={25} />
                     </Button>
                 ) : (
-                    <Button type={type}>
+                    <Button
+                        type={type}
+                        onClick={() =>
+                            dispatch(
+                                addToPlaylist({ 
+                                    uri, 
+                                    studySetId 
+                                })
+                            )
+                        }
+                    >
                         <IoMdAdd color='white' size={25} />
                     </Button>
                 )}

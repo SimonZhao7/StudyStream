@@ -17,7 +17,7 @@ export const fetchPlaylistSongs = createAsyncThunk(
         const response = await AXIOS.get(`/spotify/playlists/${studySetId}`, {
             params: {
                 spotifyData,
-                page
+                page,
             },
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -33,21 +33,47 @@ export const fetchPlaylistSongs = createAsyncThunk(
 export const removeFromPlaylist = createAsyncThunk(
     'spotify/removeFromPlaylist',
     async (body) => {
-        const { studySetId, tracks } = body
+        const { studySetId, track } = body
         const token = localStorage.getItem('jwt')
         const spotifyData = JSON.parse(localStorage.getItem('spotify'))
 
-        const response = await AXIOS.delete(`/spotify/playlists/${studySetId}`, {
-            data: {
-                tracks,
-                spotifyData,
-            },
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        })
+        const response = await AXIOS.delete(
+            `/spotify/playlists/${studySetId}`,
+            {
+                data: {
+                    track,
+                    spotifyData,
+                },
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        )
 
         if (response.status === 200) {
+            return response.data
+        }
+    }
+)
+
+export const addToPlaylist = createAsyncThunk(
+    'spotify/addToPlaylist',
+    async (body) => {
+        const { uri, studySetId } = body
+        const token = localStorage.getItem('jwt')
+        const spotifyData = JSON.parse(localStorage.getItem('spotify'))
+
+        const response = await AXIOS.post(
+            `/spotify/playlists/${studySetId}`,
+            { uri, spotifyData },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        )
+
+        if (response.status === 201) {
             return response.data
         }
     }
@@ -71,7 +97,7 @@ const spotifySlice = createSlice({
         [fetchPlaylistSongs.fulfilled]: (state, action) => {
             const { spotifyData, tracks, maxPages } = action.payload
             localStorage.setItem('spotify', JSON.stringify(spotifyData))
-            state.playlistSongs = tracks
+            state.playlistSongs = tracks.map((track) => track.track)
             state.isFetchSuccessful = true
             state.maxPages = maxPages
         },
@@ -79,16 +105,17 @@ const spotifySlice = createSlice({
             window.location.href = '/connect'
         },
         [removeFromPlaylist.fulfilled]: (state, action) => {
-            const { tracks, spotifyData } = action.payload
-
+            const { track, spotifyData } = action.payload
             localStorage.setItem('spotify', JSON.stringify(spotifyData))
             const filtered = state.playlistSongs.filter(
-                (song) =>
-                    !tracks
-                        .map((track) => track.uri)
-                        .includes(song.track.uri)
+                (song) => track.uri !== song.uri
             )
             state.playlistSongs = filtered
+        },
+        [addToPlaylist.fulfilled]: (state, action) => {
+            const { addedTrack, spotifyData } = action.payload
+            localStorage.setItem('spotify', JSON.stringify(spotifyData))
+            state.playlistSongs.push(addedTrack)
         },
     },
 })

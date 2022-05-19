@@ -60,8 +60,8 @@ const EditPlaylistModal = () => {
             </Songs>
             <YourSongs>
                 <h2 ref={yourSongsTop}>Your Songs</h2>
-                {songs.map(({ track }, index) => (
-                    <Song song={track} key={index} type='delete' />
+                {songs.map((song, index) => (
+                    <Song song={song} key={index} type='delete' />
                 ))}
                 <PaginateNav
                     page={page}
