@@ -4,6 +4,7 @@ import AXIOS from '../../api'
 const initialState = {
     editPlaylistModalOpen: false,
     playlistSongs: [],
+    recommendations: [],
     maxPages: 1,
     page: 1,
 }
@@ -13,7 +14,7 @@ export const fetchPlaylistSongs = createAsyncThunk(
     async (body) => {
         const { studySetId, page } = body
         const token = localStorage.getItem('jwt')
-        const spotifyData = localStorage.getItem('spotify')
+        const spotifyData = JSON.parse(localStorage.getItem('spotify'))
         const response = await AXIOS.get(`/spotify/playlists/${studySetId}`, {
             params: {
                 spotifyData,
@@ -79,6 +80,30 @@ export const addToPlaylist = createAsyncThunk(
     }
 )
 
+export const fetchRecommendations = createAsyncThunk(
+    'spotify/fetchRecommendations', 
+    async(tracks) => {
+        const token = localStorage.getItem('jwt')
+        const spotifyData = JSON.parse(localStorage.getItem('spotify'))
+
+        if (tracks) {
+            const response = await AXIOS.get('/spotify/tracks', {
+                params: {
+                    tracks,
+                    spotifyData,
+                },
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+    
+            if (response.status === 200) {
+                return response.data
+            }
+        }
+    }
+)
+
 const spotifySlice = createSlice({
     name: 'spotify',
     initialState,
@@ -102,7 +127,7 @@ const spotifySlice = createSlice({
             state.maxPages = maxPages
         },
         [fetchPlaylistSongs.rejected]: () => {
-            window.location.href = '/connect'
+            // window.location.href = '/connect'
         },
         [removeFromPlaylist.fulfilled]: (state, action) => {
             const { track, spotifyData } = action.payload
@@ -117,6 +142,11 @@ const spotifySlice = createSlice({
             localStorage.setItem('spotify', JSON.stringify(spotifyData))
             state.playlistSongs.push(addedTrack)
         },
+        [fetchRecommendations.fulfilled]: (state, action) => {
+            const { spotifyData, results } = action.payload
+            localStorage.setItem('spotify', JSON.stringify(spotifyData))
+            state.recommendations = results
+        }
     },
 })
 

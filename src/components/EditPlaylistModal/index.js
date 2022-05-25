@@ -3,7 +3,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import { EditWrapper, Songs, YourSongs } from './EditPlaylistModal.styles'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchPlaylistSongs, goToPage } from '../../redux/features/spotifySlice'
+import {
+    fetchPlaylistSongs,
+    fetchRecommendations,
+    goToPage,
+} from '../../redux/features/spotifySlice'
 import {
     search,
     goToPage as goToResultPage,
@@ -15,6 +19,10 @@ import Input from '../Input'
 
 const EditPlaylistModal = () => {
     const songs = useSelector((state) => state.spotify.playlistSongs)
+    const recommendations = useSelector(
+        (state) => state.spotify.recommendations
+    )
+    const loading = useSelector((state) => state.spotifySearch.loading)
     const maxPages = useSelector((state) => state.spotify.maxPages)
     const { _id } = useSelector((state) => state.studySet.studySet)
     const page = useSelector((state) => state.spotify.page)
@@ -29,17 +37,35 @@ const EditPlaylistModal = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(fetchPlaylistSongs({ studySetId: _id, page }))
-        yourSongsTop.current.scrollIntoView(true)
+        setTimeout(() => {
+            dispatch(fetchPlaylistSongs({ studySetId: _id, page }))
+            yourSongsTop.current.scrollIntoView(true)
+        }, 1000)
+        return () => clearTimeout()
     }, [_id, dispatch, page])
 
     useEffect(() => {
-        dispatch(search({
-            searchTerm,
-            page: searchPage,
-        }))
+        if (searchTerm) {
+            dispatch(
+                search({
+                    searchTerm,
+                    page: searchPage,
+                })
+            )
+        }
         searchResultsTop.current.scrollIntoView(true)
     }, [dispatch, searchPage, searchTerm])
+
+    useEffect(() => {
+        dispatch(
+            fetchRecommendations(
+                songs
+                    .slice(-5)
+                    .map((song) => song.id)
+                    .join(',')
+            )
+        )
+    }, [dispatch, songs])
 
     return (
         <EditWrapper>
@@ -47,16 +73,37 @@ const EditPlaylistModal = () => {
                 <h2 ref={searchResultsTop}>Add Songs</h2>
                 <Input
                     placeHolder='Search For A Song...'
-                    onChange={e => setSearchTerm(e.target.value)}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                 />
-                {trackResults.map((track, index) => (
-                    <Song song={track} key={index} />
-                ))}
-                <PaginateNav
-                    page={searchPage}
-                    maxPages={maxSearchPages}
-                    pageChangeMethod={goToResultPage}
-                />
+                {!loading &&
+                    (searchTerm ? (
+                        trackResults.length > 0 ? (
+                            <>
+                                <h3>Results</h3>
+                                {trackResults.map((track, index) => (
+                                    <Song song={track} key={index} />
+                                ))}
+                                <PaginateNav
+                                    page={searchPage}
+                                    maxPages={maxSearchPages}
+                                    pageChangeMethod={goToResultPage}
+                                />
+                            </>
+                        ) : (
+                            <p>No Results...</p>
+                        )
+                    ) : recommendations.length > 0 ? (
+                        <>
+                            <h3>Recommendations</h3>
+                            {recommendations.map((recommendation, index) => (
+                                <Song song={recommendation} key={index} />
+                            ))}
+                        </>
+                    ) : (
+                        <p style={{ textAlign: 'center' }}>
+                            No Recommendations... Add Some Songs!
+                        </p>
+                    ))}
             </Songs>
             <YourSongs>
                 <h2 ref={yourSongsTop}>Your Songs</h2>
