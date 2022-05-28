@@ -1,8 +1,9 @@
 import styled from 'styled-components'
-import { MainWrapper } from '../../globalStyles'
 
-export const VMainWrapper = styled(MainWrapper)`
-    flex-direction: column;
+export const StudySetContent = styled.section`
+    height: 500px;
+    display: flex;
+    gap: 50px;
 `
 
 export const FlashcardWrapper = styled.section`
@@ -62,4 +63,9 @@ export const FlashcardNav = styled.nav`
     div {
         width: 30px;
     }
+`
+
+export const SpotifyEmbed = styled.iframe`
+    height: 100%;
+    border-radius: 10px;
 `

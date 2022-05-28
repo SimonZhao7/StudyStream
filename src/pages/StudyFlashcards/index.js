@@ -2,13 +2,15 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 // Styles
 import {
-    VMainWrapper,
     FlashcardWrapper,
     Flashcard,
     QuestionWrapper,
     AnswerWrapper,
     FlashcardNav,
+    StudySetContent,
+    SpotifyEmbed,
 } from './StudyFlashcards.styles'
+import { MainWrapper } from '../../globalStyles'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStudySet } from '../../redux/features/studySetSlice'
@@ -20,7 +22,9 @@ const StudyFlashcards = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const { flashcards } = useSelector((state) => state.studySet.studySet)
+    const { flashcards, playlistId } = useSelector(
+        (state) => state.studySet.studySet
+    )
     const loading = useSelector((state) => state.studySet.loading)
     const [flipped, setFlipped] = useState(false)
     const [flashcardIndex, setFlashcardIndex] = useState(0)
@@ -45,7 +49,10 @@ const StudyFlashcards = () => {
     const handleKeyPress = (e) => {
         if (e.code === 'Space') {
             handleFlip()
-        } else if (e.code === 'ArrowRight' && flashcardIndex < flashcards.length - 1) {
+        } else if (
+            e.code === 'ArrowRight' &&
+            flashcardIndex < flashcards.length - 1
+        ) {
             handleFlashcardScroll(flashcardIndex + 1)
         } else if (e.code === 'ArrowLeft' && flashcardIndex > 0) {
             handleFlashcardScroll(flashcardIndex - 1)
@@ -62,48 +69,75 @@ const StudyFlashcards = () => {
     })
 
     return (
-        <VMainWrapper>
+        <MainWrapper>
             {!loading &&
                 (flashcards.length > 0 ? (
-                    <>
-                        <FlashcardWrapper ref={flashcard}>
-                            <Flashcard
-                                className={`${flipped ? 'flipped' : null}`}
-                                onClick={handleFlip}
-                            >
-                                <QuestionWrapper>
-                                    <h2>
-                                        {flashcards[flashcardIndex].question}
-                                    </h2>
-                                </QuestionWrapper>
-                                <AnswerWrapper>
-                                    {/* Prevent answers from showing on flashcard change */}
-                                    {flipped && (
+                    <StudySetContent>
+                        {playlistId && (
+                            <aside>
+                                <SpotifyEmbed
+                                    id='playlist-embed'
+                                    src={`https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator`}
+                                    frameBorder='0'
+                                    allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture'
+                                />
+                            </aside>
+                        )}
+
+                        <section>
+                            <FlashcardWrapper ref={flashcard}>
+                                <Flashcard
+                                    className={`${flipped ? 'flipped' : null}`}
+                                    onClick={handleFlip}
+                                >
+                                    <QuestionWrapper>
                                         <h2>
-                                            {flashcards[flashcardIndex].answer}
+                                            {
+                                                flashcards[flashcardIndex]
+                                                    .question
+                                            }
                                         </h2>
-                                    )}
-                                </AnswerWrapper>
-                            </Flashcard>
-                        </FlashcardWrapper>
-                        <FlashcardNav>
-                            <Button
-                                label='<'
-                                onClick={() => handleFlashcardScroll(flashcardIndex - 1)}
-                                isDisabled={flashcardIndex <= 0}
-                            />
-                            <h3>
-                                {flashcardIndex + 1} of {flashcards.length}
-                            </h3>
-                            <Button
-                                label='>'
-                                onClick={() => handleFlashcardScroll(flashcardIndex + 1)}
-                                isDisabled={
-                                    flashcardIndex >= flashcards.length - 1
-                                }
-                            />
-                        </FlashcardNav>
-                    </>
+                                    </QuestionWrapper>
+                                    <AnswerWrapper>
+                                        {/* Prevent answers from showing on flashcard change */}
+                                        {flipped && (
+                                            <h2>
+                                                {
+                                                    flashcards[flashcardIndex]
+                                                        .answer
+                                                }
+                                            </h2>
+                                        )}
+                                    </AnswerWrapper>
+                                </Flashcard>
+                            </FlashcardWrapper>
+                            <FlashcardNav>
+                                <Button
+                                    label='<'
+                                    onClick={() =>
+                                        handleFlashcardScroll(
+                                            flashcardIndex - 1
+                                        )
+                                    }
+                                    isDisabled={flashcardIndex <= 0}
+                                />
+                                <h3>
+                                    {flashcardIndex + 1} of {flashcards.length}
+                                </h3>
+                                <Button
+                                    label='>'
+                                    onClick={() =>
+                                        handleFlashcardScroll(
+                                            flashcardIndex + 1
+                                        )
+                                    }
+                                    isDisabled={
+                                        flashcardIndex >= flashcards.length - 1
+                                    }
+                                />
+                            </FlashcardNav>
+                        </section>
+                    </StudySetContent>
                 ) : (
                     <>
                         <h1>This study set has no flashcards...</h1>
@@ -116,7 +150,7 @@ const StudyFlashcards = () => {
                         />
                     </>
                 ))}
-        </VMainWrapper>
+        </MainWrapper>
     )
 }
 

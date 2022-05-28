@@ -127,7 +127,7 @@ const spotifySlice = createSlice({
             state.maxPages = maxPages
         },
         [fetchPlaylistSongs.rejected]: () => {
-            // window.location.href = '/connect'
+            window.location.href = '/connect'
         },
         [removeFromPlaylist.fulfilled]: (state, action) => {
             const { track, spotifyData } = action.payload
