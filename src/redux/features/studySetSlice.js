@@ -20,6 +20,7 @@ const initialState = {
     loading: true,
     flashcardFormOpen: false,
     addPlaylistModalOpen: false,
+    editTitleModalOpen: false,
     editable: true,
     editingId: null,
     studySet: {},
@@ -47,9 +48,13 @@ const studySetSlice = createSlice({
         openPlaylistModal: (state) => {
             state.addPlaylistModalOpen = true
         },
+        openEditTitleModal: (state) => {
+            state.editTitleModalOpen = true
+        },
         closeModals: (state) => {
             state.editingId = null
             state.addPlaylistModalOpen = false
+            state.editTitleModalOpen = false
         },
         updateFlashcard: (state, action) => {
             const flashcards = state.studySet.flashcards
@@ -60,6 +65,9 @@ const studySetSlice = createSlice({
                 return flashcard
             })
             state.studySet.flashcards = updatedFlashcards
+        },
+        changeTitle: (state, action) => {
+            state.studySet.title = action.payload
         }
     },
     extraReducers: {
@@ -85,7 +93,9 @@ export const {
     openEditModal,
     updateFlashcard,
     openPlaylistModal,
-    closeModals
+    closeModals,
+   openEditTitleModal,
+    changeTitle,
 } = studySetSlice.actions
 
 export default studySetSlice.reducer

@@ -18,11 +18,13 @@ import Flashcard from '../../components/Flashcard'
 import FlashcardEditModal from '../../components/FlashcardEditModal'
 import AddPlaylistForm from '../../components/AddPlaylistForm'
 import EditPlaylistModal from '../../components/EditPlaylistModal'
+import ChangeStudySetTitleForm from '../../components/ChangeStudySetTitleForm'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import {
     fetchStudySet,
     openPlaylistModal,
+    openEditTitleModal,
 } from '../../redux/features/studySetSlice'
 import { openEditModal } from '../../redux/features/spotifySlice'
 import { showFlashcardForm } from '../../redux/features/studySetSlice'
@@ -40,6 +42,9 @@ const EditStudySet = () => {
     )
     const addPlaylistModalOpen = useSelector(
         (state) => state.studySet.addPlaylistModalOpen
+    )
+    const editTitleModalOpen = useSelector(
+        (state) => state.studySet.editTitleModalOpen
     )
     const { title, flashcards, playlistId } = useSelector(
         (state) => state.studySet.studySet
@@ -67,7 +72,12 @@ const EditStudySet = () => {
                                 <TitleRow>
                                     <h1>{title}</h1>
                                     <ButtonsWrapper>
-                                        <Button label='Change Title' />
+                                        <Button
+                                            label='Change Title'
+                                            onClick={() =>
+                                                dispatch(openEditTitleModal())
+                                            }
+                                        />
                                         <Button
                                             label='Delete'
                                             color={'var(--error-color)'}
@@ -139,6 +149,11 @@ const EditStudySet = () => {
             {editPlaylistModalOpen && (
                 <FlashcardEditModal>
                     <EditPlaylistModal />
+                </FlashcardEditModal>
+            )}
+            {editTitleModalOpen && (
+                <FlashcardEditModal>
+                    <ChangeStudySetTitleForm />
                 </FlashcardEditModal>
             )}
         </EditWrapper>
