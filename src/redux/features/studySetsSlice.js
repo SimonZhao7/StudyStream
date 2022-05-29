@@ -18,6 +18,22 @@ export const fetchStudySets = createAsyncThunk(
     }
 )
 
+export const deleteStudySet = createAsyncThunk(
+    'studySetSlice/deleteStudySet',
+    async (studySetId) => {
+        const token = localStorage.getItem('jwt')
+        const response = await AXIOS.delete(`/studysets/${studySetId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+
+        if (response.status === 200) {
+            return studySetId
+        }
+    }
+)
+
 const initialState = {
     loading: true,
     value: [],
@@ -31,7 +47,7 @@ const studySetsSlice = createSlice({
     reducers: {
         goToPage: (state, action) => {
             state.page = action.payload
-        }
+        },
     },
     extraReducers: {
         [fetchStudySets.pending]: (state) => {
@@ -42,6 +58,11 @@ const studySetsSlice = createSlice({
             state.value = studySets
             state.maxPages = maxPages
             state.loading = false
+        },
+        [deleteStudySet.fulfilled]: (state, action) => {
+            state.value = state.value.filter(
+                (studySet) => studySet._id !== action.payload
+            )
         },
     },
 })

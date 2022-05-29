@@ -31,7 +31,7 @@ const ChangeStudySetTitleForm = () => {
                 },
             })
 
-            if (response.status === 204) {
+            if (response.status === 200) {
                 dispatch(changeTitle(title))
                 dispatch(closeModals())
             }

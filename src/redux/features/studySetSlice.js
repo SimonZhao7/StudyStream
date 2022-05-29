@@ -58,7 +58,7 @@ const studySetSlice = createSlice({
         },
         updateFlashcard: (state, action) => {
             const flashcards = state.studySet.flashcards
-            const updatedFlashcards = flashcards.map(flashcard => {
+            const updatedFlashcards = flashcards.map((flashcard) => {
                 if (flashcard._id === action.payload._id) {
                     return action.payload
                 }
@@ -68,7 +68,7 @@ const studySetSlice = createSlice({
         },
         changeTitle: (state, action) => {
             state.studySet.title = action.payload
-        }
+        },
     },
     extraReducers: {
         [fetchStudySet.pending]: (state) => {
@@ -94,7 +94,7 @@ export const {
     updateFlashcard,
     openPlaylistModal,
     closeModals,
-   openEditTitleModal,
+    openEditTitleModal,
     changeTitle,
 } = studySetSlice.actions
 

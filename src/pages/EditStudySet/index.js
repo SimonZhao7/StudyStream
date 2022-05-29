@@ -25,9 +25,10 @@ import {
     fetchStudySet,
     openPlaylistModal,
     openEditTitleModal,
+    showFlashcardForm,
 } from '../../redux/features/studySetSlice'
+import { deleteStudySet } from '../../redux/features/studySetsSlice'
 import { openEditModal } from '../../redux/features/spotifySlice'
-import { showFlashcardForm } from '../../redux/features/studySetSlice'
 
 const EditStudySet = () => {
     const { id } = useParams()
@@ -46,9 +47,12 @@ const EditStudySet = () => {
     const editTitleModalOpen = useSelector(
         (state) => state.studySet.editTitleModalOpen
     )
-    const { title, flashcards, playlistId } = useSelector(
-        (state) => state.studySet.studySet
-    )
+    const {
+        _id: studySetId,
+        title,
+        flashcards,
+        playlistId,
+    } = useSelector((state) => state.studySet.studySet)
     const token = localStorage.getItem('jwt')
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -84,6 +88,12 @@ const EditStudySet = () => {
                                             hoverColor={
                                                 'var(--error-color-hover)'
                                             }
+                                            onClick={() => {
+                                                dispatch(
+                                                    deleteStudySet(studySetId)
+                                                )
+                                                navigate('/my-studysets')
+                                            }}
                                         />
                                         {playlistId ? (
                                             <Button
