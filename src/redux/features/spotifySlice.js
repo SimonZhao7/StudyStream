@@ -81,8 +81,8 @@ export const addToPlaylist = createAsyncThunk(
 )
 
 export const fetchRecommendations = createAsyncThunk(
-    'spotify/fetchRecommendations', 
-    async(tracks) => {
+    'spotify/fetchRecommendations',
+    async (tracks) => {
         const token = localStorage.getItem('jwt')
         const spotifyData = JSON.parse(localStorage.getItem('spotify'))
 
@@ -93,10 +93,10 @@ export const fetchRecommendations = createAsyncThunk(
                     spotifyData,
                 },
                 headers: {
-                    Authorization: `Bearer ${token}`
-                }
+                    Authorization: `Bearer ${token}`,
+                },
             })
-    
+
             if (response.status === 200) {
                 return response.data
             }
@@ -143,10 +143,12 @@ const spotifySlice = createSlice({
             state.playlistSongs.push(addedTrack)
         },
         [fetchRecommendations.fulfilled]: (state, action) => {
-            const { spotifyData, results } = action.payload
-            localStorage.setItem('spotify', JSON.stringify(spotifyData))
-            state.recommendations = results
-        }
+            if (action.payload) {
+                const { spotifyData, results } = action.payload
+                localStorage.setItem('spotify', JSON.stringify(spotifyData))
+                state.recommendations = results
+            }
+        },
     },
 })
 
