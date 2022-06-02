@@ -11,7 +11,7 @@ export const RegisterForm = styled.section`
     align-items: center;
 
     background-color: white;
-    color: black;
+    color: var(--dark-gray);
 `
 
 export const FormContent = styled.form`

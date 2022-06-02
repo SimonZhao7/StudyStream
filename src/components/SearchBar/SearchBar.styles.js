@@ -8,7 +8,7 @@ export const SearchForm = styled.form`
 
 export const IconContainer = styled.i`
     background-color: white;
-    color: black;
+    color: var(--dark-gray);
     width: 300px;
     height: 35px;
     padding: 5px 0 5px 5px;
@@ -21,7 +21,7 @@ export const IconContainer = styled.i`
     gap: 5px;
 
     :hover {
-        border: solid 2px black;
+        border: solid 2px var(--dark-gray);
     }
 `
 
@@ -41,7 +41,7 @@ export const ResultWrapper = styled.div`
     display: none;
 
     button, h2 {
-        color: black;
+        color: var(--dark-gray);
         text-align: center;
     }
 `

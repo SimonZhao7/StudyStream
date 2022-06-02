@@ -5,7 +5,7 @@ export const EditWrapper = styled.section`
     height: 550px;
     padding: 10px;
     background-color: white;
-    color: black;
+    color: var(--dark-gray);
     border-radius: 5px;
     display: flex;
     gap: 20px;

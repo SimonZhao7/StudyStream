@@ -22,6 +22,6 @@ export const InputBar = styled.input`
     transition: border-color 0.3s ease;
     
     :hover {
-        border: 2px solid black;
+        border: 2px solid var(--dark-gray);
     }
 `

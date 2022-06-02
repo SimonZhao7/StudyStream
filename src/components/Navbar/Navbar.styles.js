@@ -9,7 +9,6 @@ export const NavWrapper = styled.header`
     justify-content: space-between;
     background-color: var(--primary-color);
     padding: 10px 15px;
-    box-shadow: 1px 0 2px lightgray;
     position: fixed;
     top: 0;
     z-index: 10;

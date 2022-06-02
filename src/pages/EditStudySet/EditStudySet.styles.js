@@ -15,7 +15,7 @@ export const StudySetWrapper = styled.section`
 
 export const StudySetInfo = styled.section`
     background-color: white;
-    color: black;
+    color: var(--dark-gray);
     width: 100%;
     max-height: 300px;
     border-radius: 10px;

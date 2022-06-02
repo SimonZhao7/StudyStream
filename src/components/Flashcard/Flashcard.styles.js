@@ -6,7 +6,7 @@ export const FlashcardWrapper = styled.div`
     width: 100%;
     padding: 20px 20px 20px 0;
     border-radius: 10px;
-    color: black;
+    color: var(--dark-gray);
     max-height: 250px;
     gap: 20px;
 `

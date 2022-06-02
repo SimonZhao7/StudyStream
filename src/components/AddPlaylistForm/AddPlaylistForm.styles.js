@@ -5,5 +5,5 @@ export const FormWrapper = styled.form`
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    color: black;
+    color: var(--dark-gray);
 `

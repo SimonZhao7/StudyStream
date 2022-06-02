@@ -7,7 +7,7 @@ export const CreateFormWrapper = styled.section`
     background-color: white;
     padding: 40px 20px;
     border-radius: 10px;
-    color: black;
+    color: var(--dark-gray);
     
     margin-bottom: 150px;
 `

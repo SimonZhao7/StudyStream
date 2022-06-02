@@ -9,7 +9,7 @@ export const LoginFormWrapper = styled.div`
     display: flex;
     align-items: center;
     padding: 40px 20px;
-    color: black;
+    color: var(--dark-gray);
 
     margin-bottom: 100px;
 `

@@ -9,7 +9,7 @@ export const StudySetContent = styled.section`
 export const FlashcardWrapper = styled.section`
     width: 800px;
     height: 500px;
-    color: black;
+    color: var(--dark-gray);
 
     perspective: 2000px;
 

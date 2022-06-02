@@ -7,8 +7,9 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Poppins', sans-serif;
         --primary-color: #1690c4;
         --secondary-color: #1dc6cc;
-        --primary-color-hover: #11749e;
+        --primary-color-hover: #137CA9;
         --secondary-color-hover: #18b0b5;
+        --dark-gray: #292b2c;
         --error-color: #f20000;
         --error-color-hover: #d40000;
     }
