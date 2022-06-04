@@ -8,17 +8,17 @@ import { NavWrapper, NavLinks, LinkButton, UserImg } from './Navbar.styles';
 import SearchBar from '../SearchBar';
 
 
-const Navbar = () => {
+const Navbar = ({ transparent }) => {
     const loading = useSelector(state => state.user.loading)
     const signedIn = useSelector(state => state.user.signedIn)
     const { userImage } = useSelector(state => state.user.value)
 
     return (
-        <NavWrapper>
+        <NavWrapper transparent={transparent}>
             {!loading && 
             <>
             <NavLinks>
-                <Link to='/' >Home</Link>
+                <Link to='/home'>Home</Link>
                 <Link to='/my-studysets' >Study Sets</Link>
                 <Link to='/create' >Create</Link>
             </NavLinks>
@@ -34,7 +34,7 @@ const Navbar = () => {
                 :
                     <>
                     <Link to='/login'>Login</Link>
-                    <Link to='/register'><LinkButton>Register</LinkButton></Link>
+                    <Link to='/register'><LinkButton transparent={transparent}>Register</LinkButton></Link>
                     </>
                 }
             </NavLinks>

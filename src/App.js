@@ -6,6 +6,7 @@ import { login } from './redux/features/userSlice';
 // Components
 import Navbar from './components/Navbar';
 // Pages
+import Hero from './pages/Hero';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
@@ -29,9 +30,9 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
+      <Navbar transparent={window.location.pathname === '/'} />
       <Routes>
-        <Route path='/' element={<Home/>} />
+        <Route path='/home' element={<Home/>} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />
@@ -42,6 +43,7 @@ function App() {
         <Route path='/results/*' element={<SearchResults />} />
         <Route path='/connect' element={<APIConnect />} />
         <Route path='/api/callback' element={<APICallback />} />
+        <Route path='/' element={<Hero />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </Router>
