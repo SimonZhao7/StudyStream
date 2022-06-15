@@ -21,8 +21,11 @@ const SearchResults = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        if (!localStorage.getItem('jwt')) {
+            navigate('/home')
+        }
         dispatch(fetchSearchSet(`title=${searchTerm}&sort=-created`))
-    }, [dispatch, searchTerm])
+    }, [dispatch, searchTerm, navigate])
 
     return (
         <MainWrapper style={{ alignItems: 'flex-start' }}>

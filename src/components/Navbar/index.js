@@ -8,13 +8,13 @@ import { NavWrapper, NavLinks, LinkButton, UserImg } from './Navbar.styles';
 import SearchBar from '../SearchBar';
 
 
-const Navbar = ({ transparent }) => {
+const Navbar = () => {
     const loading = useSelector(state => state.user.loading)
     const signedIn = useSelector(state => state.user.signedIn)
     const { userImage } = useSelector(state => state.user.value)
 
     return (
-        <NavWrapper transparent={transparent}>
+        <NavWrapper>
             {!loading && 
             <>
             <NavLinks>
@@ -22,7 +22,7 @@ const Navbar = ({ transparent }) => {
                 <Link to='/my-studysets' >Study Sets</Link>
                 <Link to='/create' >Create</Link>
             </NavLinks>
-            <SearchBar />
+            {signedIn && <SearchBar />}
             <NavLinks>
                 {/* If user is logged in show Logout and Profile Picture */}
                 {signedIn 
@@ -34,7 +34,7 @@ const Navbar = ({ transparent }) => {
                 :
                     <>
                     <Link to='/login'>Login</Link>
-                    <Link to='/register'><LinkButton transparent={transparent}>Register</LinkButton></Link>
+                    <Link to='/register'><LinkButton>Register</LinkButton></Link>
                     </>
                 }
             </NavLinks>

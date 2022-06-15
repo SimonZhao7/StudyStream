@@ -23,7 +23,7 @@ const Login = () => {
 
     useEffect(() => {
         if (localStorage.getItem('jwt')) {
-            navigate('/')
+            navigate('/home')
         }
     }, [navigate])
 
@@ -36,7 +36,7 @@ const Login = () => {
                 const token = response.data.token
                 localStorage.setItem('jwt', token)
                 dispatch(login(token))
-                navigate('/')
+                navigate('/home')
             }
         } catch (error) {
             setErrors(error.response.data)

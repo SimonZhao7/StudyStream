@@ -7,7 +7,7 @@ export const NavWrapper = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: ${props => props.transparent ? 'rgba(0, 0, 0, 0.8)' : 'var(--primary-color)'};
+    background-color: var(--primary-color);
     padding: 10px 15px;
     position: fixed;
     top: 0;
@@ -25,7 +25,7 @@ export const NavLinks = styled.nav`
 `
 
 export const LinkButton = styled.button`
-    background-color: ${props => props.transparent ? 'var(--primary-color)' : 'var(--secondary-color)'};
+    background-color: var(--secondary-color);
     padding: 10px;
     height: 25px;
     cursor: pointer;
@@ -42,7 +42,7 @@ export const LinkButton = styled.button`
     transition: background-color 0.3s ease;
 
     :hover {
-        background-color: ${props => props.transparent ? 'var(--primary-color-hover)' : 'var(--secondary-color-hover)'};
+        background-color: var(--secondary-color-hover);
     }
 `
 

@@ -79,9 +79,13 @@ const studySetSlice = createSlice({
             state.editable = action.payload.editable
             state.loading = false
         },
-        [fetchStudySet.rejected]: (state) => {
-            state.loading = false
-        },
+        [fetchStudySet.rejected]: (state, action) => {
+            if (action.error.message.slice(-3) === '404') {
+                window.location.href = '/404'
+            } else {
+                window.location.href = '/login'
+            }
+        }
     },
 })
 
