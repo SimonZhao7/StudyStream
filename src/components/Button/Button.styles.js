@@ -9,8 +9,8 @@ export const ButtonContent = styled.button`
     width: 100%;
     height: 35px;
     border: none;
-    border-radius: 5px;
-    color: white;
+    border-radius: ${props => props.unrounded ? 0 : '5px'};
+    color: ${props => props.textColor ? props.textColor : 'white'};
     background-color: ${props => {
         const { isDisabled, hoverColor, color } = props
         return isDisabled ? (hoverColor || 'var(--primary-color-hover)') : (color || 'var(--primary-color)')

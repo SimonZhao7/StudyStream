@@ -82,7 +82,7 @@ const Navbar = () => {
                         <BsFillDiamondFill color='white' size={20} />
                     </IconWrapper>
                     <UserLinks>
-                        <a href='/'>User Settings</a>
+                        <a href='/settings'>User Settings</a>
                         <a href='/'>Profile</a>
                     </UserLinks>
                 </>
