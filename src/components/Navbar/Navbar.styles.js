@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-
+import styled from 'styled-components'
 
 export const NavWrapper = styled.header`
     width: 100%;
@@ -53,4 +52,41 @@ export const UserImg = styled.img`
     aspect-ratio: 1 / 1;
     object-fit: cover;
     cursor: pointer;
+`
+
+export const IconWrapper = styled.div`
+    position: absolute;
+    z-index: 9;
+    top: 60px;
+    right: -100px;
+`
+
+export const UserLinks = styled.div`
+    position: absolute;
+    z-index: 10;
+    right: 10px;
+    top: 70px;
+
+    background-color: white;
+    width: 150px;
+    border-radius: 5px;
+
+    a {
+        display: block;
+        text-align: center;
+        padding: 5px;
+        color: var(--dark-gray);
+    }
+
+    a:first-child {
+        border-radius: 5px 5px 0 0;
+    }
+
+    a:last-child {
+        border-radius: 0 0 5px 5px;
+    }
+
+    a:hover {
+        background-color: #f5f5f5;
+    }
 `

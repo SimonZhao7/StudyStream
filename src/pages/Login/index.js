@@ -68,6 +68,7 @@ const Login = () => {
                         type='password'
                         name='password'
                         label='Password'
+                        autoComplete='on'
                         onChange={handleChange}
                     />
                     <Button label='Login' onClick={handleSubmit} loading={processing} />
