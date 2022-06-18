@@ -51,36 +51,50 @@ const Register = () => {
             <RegisterForm>
                 <FormContent>
                     <legend>Register</legend>
-                    {errors.length > 0 && <Alert text={errors[0]} type='error' />}
+                    {errors.length > 0 && (
+                        <Alert text={errors[0]} type='error' />
+                    )}
                     <Input
                         label='Email'
-                        name='email'
-                        type='email'
-                        placeHolder='Enter a unique email...'
-                        onChange={handleChange}
+                        attrs={{
+                            name: 'email',
+                            type: 'email',
+                            placeHolder: 'Enter a unique email...',
+                            onChange: handleChange,
+                        }}
                     />
                     <Input
                         label='Username'
-                        name='username'
-                        type='text'
-                        placeHolder='Pick an amazing username...'
-                        onChange={handleChange}
+                        attrs={{
+                            name: 'username',
+                            type: 'text',
+                            placeHolder: 'Pick an amazing username...',
+                            onChange: handleChange,
+                        }}
                     />
                     <Input
                         label='Password'
-                        name='password'
-                        type='password'
-                        placeHolder='Include an unbreakable password...'
-                        onChange={handleChange}
+                        attrs={{
+                            name: 'password',
+                            type: 'password',
+                            placeHolder: 'Include an unbreakable password...',
+                            onChange: handleChange,
+                        }}
                     />
                     <Input
                         label='Confirm Password'
-                        name='confirmPassword'
-                        type='password'
-                        placeHolder='Type it again...'
-                        onChange={handleChange}
+                        attrs={{
+                            name: 'confirmPassword',
+                            type: 'password',
+                            placeHolder: 'Type it again...',
+                            onChange: handleChange,
+                        }}
                     />
-                    <Button label='Done!' onClick={handleSubmit} loading={processing} />
+                    <Button
+                        label='Done!'
+                        onClick={handleSubmit}
+                        loading={processing}
+                    />
                 </FormContent>
             </RegisterForm>
         </MainWrapper>

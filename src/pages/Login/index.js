@@ -17,7 +17,7 @@ const Login = () => {
     const [formData, setFormData] = useState({})
     const [processing, setProcessing] = useState(false)
     const [errors, setErrors] = useState([])
-    const loading = useSelector(state => state.user.loading)
+    const loading = useSelector((state) => state.user.loading)
     let navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -28,7 +28,7 @@ const Login = () => {
     }, [navigate])
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         setProcessing(true)
         try {
             const response = await AXIOS.post('/auth/login', formData)
@@ -53,28 +53,38 @@ const Login = () => {
 
     return (
         <MainWrapper>
-            {!loading && 
-            <LoginFormWrapper>
-                <LoginForm>
-                    <legend>Login</legend>
-                    {errors.length > 0 && <Alert text={errors[0]} type='error' />}
-                    <Input
-                        type='text'
-                        name='username'
-                        label='Username'
-                        onChange={handleChange}
-                    />
-                    <Input
-                        type='password'
-                        name='password'
-                        label='Password'
-                        autoComplete='on'
-                        onChange={handleChange}
-                    />
-                    <Button label='Login' onClick={handleSubmit} loading={processing} />
-                </LoginForm>
-            </LoginFormWrapper>
-            }          
+            {!loading && (
+                <LoginFormWrapper>
+                    <LoginForm>
+                        <legend>Login</legend>
+                        {errors.length > 0 && (
+                            <Alert text={errors[0]} type='error' />
+                        )}
+                        <Input
+                            label='Username'
+                            attrs={{
+                                type: 'text',
+                                name: 'username',
+                                onChange: handleChange,
+                            }}
+                        />
+                        <Input
+                            label='Password'
+                            attrs={{
+                                type: 'password',
+                                name: 'password',
+                                autoComplete: 'on',
+                                onChange: handleChange,
+                            }}
+                        />
+                        <Button
+                            label='Login'
+                            onClick={handleSubmit}
+                            loading={processing}
+                        />
+                    </LoginForm>
+                </LoginFormWrapper>
+            )}
         </MainWrapper>
     )
 }

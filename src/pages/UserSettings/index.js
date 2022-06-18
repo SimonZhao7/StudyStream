@@ -149,17 +149,21 @@ const UserSettings = () => {
                         )}
                         <Input
                             label={'New Username'}
-                            type={'text'}
-                            placeHolder={'Enter new username'}
-                            onChange={handleChange}
-                            name='username'
+                            attrs={{
+                                type: 'text',
+                                placeHolder: 'Enter new username',
+                                onChange: handleChange,
+                                name: 'username',
+                            }}
                         />
                         <Input
                             label={'Password'}
-                            type={'password'}
-                            placeHolder={'Enter password'}
-                            onChange={handleChange}
-                            name='password'
+                            attrs={{
+                                type: 'password',
+                                placeHolder: 'Enter password',
+                                onChange: handleChange,
+                                name: 'password',
+                            }}
                         />
                     </>
                 )}
@@ -177,24 +181,30 @@ const UserSettings = () => {
                         )}
                         <Input
                             label={'Current Password'}
-                            type={'password'}
-                            placeHolder={'Enter password'}
-                            onChange={handleChange}
-                            name='password'
+                            attrs={{
+                                type: 'password',
+                                placeHolder: 'Enter password',
+                                onChange: handleChange,
+                                name: 'password',
+                            }}
                         />
                         <Input
                             label={'New Password'}
-                            type={'password'}
-                            placeHolder={'Enter new password'}
-                            onChange={handleChange}
-                            name='newPassword'
+                            attrs={{
+                                type: 'password',
+                                placeHolder: 'Enter new password',
+                                onChange: handleChange,
+                                name: 'newPassword',
+                            }}
                         />
                         <Input
                             label={'Confirm Password'}
-                            type={'password'}
-                            placeHolder={'Confirm password'}
-                            onChange={handleChange}
-                            name='confirmPassword'
+                            attrs={{
+                                type: 'password',
+                                placeHolder: 'Confirm password',
+                                onChange: handleChange,
+                                name: 'confirmPassword',
+                            }}
                         />
                     </>
                 )}
@@ -212,17 +222,21 @@ const UserSettings = () => {
                         )}
                         <Input
                             label={'Email'}
-                            type={'email'}
-                            placeHolder={'Enter email'}
-                            onChange={handleChange}
-                            name='email'
+                            attrs={{
+                                type: 'email',
+                                placeHolder: 'Enter email',
+                                onChange: handleChange,
+                                name: 'email',
+                            }}
                         />
                         <Input
                             label={'Password'}
-                            type={'password'}
-                            placeHolder={'Enter password'}
-                            onChange={handleChange}
-                            name='password'
+                            attrs={{
+                                type: 'password',
+                                placeHolder: 'Enter password',
+                                onChange: handleChange,
+                                name: 'password',
+                            }}
                         />
                     </>
                 )}

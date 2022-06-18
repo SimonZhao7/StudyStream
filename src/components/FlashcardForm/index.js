@@ -66,17 +66,21 @@ const FlashcardForm = () => {
     return (
         <FormWrapper>
             {errors.length > 0 && <Alert text={errors[0]} type='error' />}
-            <Input
-                type='text'
+            <Input 
                 label='Question'
-                name='question'
-                onChange={handleChange}
+                attrs={{
+                    type: 'text',
+                    name: 'question',
+                    onChange: handleChange,
+                }}
             />
             <Input
-                type='text'
                 label='Answer'
-                name='answer'
-                onChange={handleChange}
+                attrs={{ 
+                    type: 'text',
+                    name: 'answer',
+                    onChange: handleChange,
+                }}
             />
             <Button
                 label={btnText}

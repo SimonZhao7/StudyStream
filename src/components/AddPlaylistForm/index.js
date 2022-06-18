@@ -70,10 +70,12 @@ const AddPlaylistForm = () => {
             <legend>Add Playlist</legend>
             {errors && <Alert text={errors[0]} type='error' />}
             <Input
-                type='text'
+                attrs={{
+                    type: 'text',
+                    name: 'name',
+                    onChange: handleChange,
+                }}
                 label='Playlist Name'
-                name='name'
-                onChange={handleChange}
             />
             <Button
                 label='Add Playlist To Study Set'

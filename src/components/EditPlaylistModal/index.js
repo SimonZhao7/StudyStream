@@ -72,8 +72,10 @@ const EditPlaylistModal = () => {
             <Songs>
                 <h2 ref={searchResultsTop}>Add Songs</h2>
                 <Input
-                    placeHolder='Search For A Song...'
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    attrs={{
+                        placeHolder: 'Search For A Song...',
+                        onChange: (e) => setSearchTerm(e.target.value),
+                    }}
                 />
                 {!loading &&
                     (searchTerm ? (

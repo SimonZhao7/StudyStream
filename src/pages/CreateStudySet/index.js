@@ -61,7 +61,7 @@ const CreateStudySet = () => {
                     <CreateForm>
                         <legend>New Study Set</legend>
                         {errors.length > 0 && <Alert text={errors[0]} type='error' />}
-                        <Input label='Title' name='title' onChange={handleChange} />
+                        <Input label='Title' attrs={{ name: 'title', onChange: handleChange, }} />
                         <Button label='Create' loading={processing} onClick={handleSubmit} />
                     </CreateForm>
                 </CreateFormWrapper>

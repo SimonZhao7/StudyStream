@@ -51,9 +51,11 @@ const ChangeStudySetTitleForm = () => {
             {errors.length > 0 && <Alert text={errors[0]} type='error' />}
             <Input
                 label='Title'
-                placeHolder={'Enter a new title...'}
-                name='title'
-                onChange={(e) => setTitle(e.target.value)}
+                attrs={{
+                    placeHolder: 'Enter a new title...',
+                    name: 'title',
+                    onChange: (e) => setTitle(e.target.value),
+                }}
             />
             <Button label={'Change Study Set Name'} onClick={handleSubmit} loading={processing} />
         </FormWrapper>
