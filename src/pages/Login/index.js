@@ -9,7 +9,7 @@ import { MainWrapper } from '../../globalStyles'
 // Components
 import Input from '../../components/Input'
 import Button from '../../components/Button'
-import Error from '../../components/Error'
+import Alert from '../../components/Alert'
 // API
 import AXIOS from '../../api'
 
@@ -57,7 +57,7 @@ const Login = () => {
             <LoginFormWrapper>
                 <LoginForm>
                     <legend>Login</legend>
-                    {errors.length > 0 && <Error error={errors[0]} />}
+                    {errors.length > 0 && <Alert text={errors[0]} type='error' />}
                     <Input
                         type='text'
                         name='username'

@@ -5,7 +5,7 @@ import { FormWrapper } from './FlashcardForm.styles'
 // Components
 import Input from '../Input'
 import Button from '../Button'
-import Error from '../Error'
+import Alert from '../Alert'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -65,7 +65,7 @@ const FlashcardForm = () => {
 
     return (
         <FormWrapper>
-            {errors.length > 0 && <Error error={errors[0]} />}
+            {errors.length > 0 && <Alert text={errors[0]} type='error' />}
             <Input
                 type='text'
                 label='Question'

@@ -4,7 +4,7 @@ import { FormWrapper } from './ChangeStudySetTitleForm.styles'
 // Components
 import Input from '../Input'
 import Button from '../Button'
-import Error from '../Error'
+import Alert from '../Alert'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { changeTitle, closeModals } from '../../redux/features/studySetSlice'
@@ -48,7 +48,7 @@ const ChangeStudySetTitleForm = () => {
     return (
         <FormWrapper>
             <legend>Change Playlist Title</legend>
-            {errors.length > 0 && <Error error={errors[0]} />}
+            {errors.length > 0 && <Alert text={errors[0]} type='error' />}
             <Input
                 label='Title'
                 placeHolder={'Enter a new title...'}

@@ -6,7 +6,7 @@ import { MainWrapper } from '../../globalStyles'
 // Components
 import Input from '../../components/Input'
 import Button from '../../components/Button'
-import Error from '../../components/Error'
+import Alert from '../../components/Alert'
 // Redux
 import { useDispatch } from 'react-redux'
 import { login } from '../../redux/features/userSlice'
@@ -51,7 +51,7 @@ const Register = () => {
             <RegisterForm>
                 <FormContent>
                     <legend>Register</legend>
-                    {errors.length > 0 && <Error error={errors[0]}/>}
+                    {errors.length > 0 && <Alert text={errors[0]} type='error' />}
                     <Input
                         label='Email'
                         name='email'

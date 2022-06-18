@@ -5,7 +5,7 @@ import { FormWrapper } from './AddPlaylistForm.styles'
 // Components
 import Input from '../Input'
 import Button from '../Button'
-import Error from '../Error'
+import Alert from '../Alert'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStudySet, closeModals } from '../../redux/features/studySetSlice'
@@ -68,7 +68,7 @@ const AddPlaylistForm = () => {
     return (
         <FormWrapper>
             <legend>Add Playlist</legend>
-            {errors && <Error error={errors[0]} />}
+            {errors && <Alert text={errors[0]} type='error' />}
             <Input
                 type='text'
                 label='Playlist Name'

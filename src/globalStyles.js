@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
         --dark-gray: #292b2c;
         --error-color: #f20000;
         --error-color-hover: #d40000;
+        --success-color: #5cb85c;
     }
 
     html, body, #root {

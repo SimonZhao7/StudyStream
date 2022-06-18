@@ -1,7 +1,7 @@
 import React from 'react'
 import { ButtonWrapper, ButtonContent, ButtonSpinner } from './Button.styles'
 
-const Button = ({ label, onClick, width, loading, color, hoverColor, isDisabled, unrounded, textColor }) => {
+const Button = ({ label, onClick, width, loading, color, hoverColor, isDisabled, unrounded, textColor, type }) => {
     return (
         <ButtonWrapper width={width}>
             <ButtonContent
@@ -13,6 +13,7 @@ const Button = ({ label, onClick, width, loading, color, hoverColor, isDisabled,
                 hoverColor={hoverColor}
                 unrounded={unrounded}
                 textColor={textColor}
+                type={type}
             >
                 {loading ? <ButtonSpinner></ButtonSpinner> : label}
             </ButtonContent>
