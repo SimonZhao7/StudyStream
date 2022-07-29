@@ -20,7 +20,9 @@ const Hero = () => {
                     new songs and knowledge with study sets created by other
                     users.
                 </h3>
-                <Button label='Get Started' width='20%' />
+                <a href='/login'>
+                    <Button label='Get Started' width='20%' />
+                </a>
                 <BenefitsWrapper>
                     <BenefitWrapper>
                         <WordAccent></WordAccent>

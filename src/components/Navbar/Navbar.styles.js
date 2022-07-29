@@ -25,6 +25,7 @@ export const NavLinks = styled.nav`
 
 export const LinkButton = styled.button`
     background-color: var(--secondary-color);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
     padding: 10px;
     height: 25px;
     cursor: pointer;

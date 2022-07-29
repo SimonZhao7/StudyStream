@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 // Styles
-import { EditWrapper, Songs, YourSongs } from './EditPlaylistModal.styles'
+import { EditWrapper, ContentHalf, NotifText } from './EditPlaylistModal.styles'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -16,6 +16,7 @@ import {
 import Song from '../Song'
 import PaginateNav from '../PaginateNav'
 import Input from '../Input'
+import Spinner from '../Spinner'
 
 const EditPlaylistModal = () => {
     const songs = useSelector((state) => state.spotify.playlistSongs)
@@ -69,7 +70,7 @@ const EditPlaylistModal = () => {
 
     return (
         <EditWrapper>
-            <Songs>
+            <ContentHalf>
                 <h2 ref={searchResultsTop}>Add Songs</h2>
                 <Input
                     attrs={{
@@ -77,8 +78,8 @@ const EditPlaylistModal = () => {
                         onChange: (e) => setSearchTerm(e.target.value),
                     }}
                 />
-                {!loading &&
-                    (searchTerm ? (
+                {!loading ? (
+                    searchTerm ? (
                         trackResults.length > 0 ? (
                             <>
                                 <h3>Results</h3>
@@ -92,7 +93,7 @@ const EditPlaylistModal = () => {
                                 />
                             </>
                         ) : (
-                            <p>No Results...</p>
+                            <NotifText>No Results...</NotifText>
                         )
                     ) : recommendations.length > 0 ? (
                         <>
@@ -102,22 +103,32 @@ const EditPlaylistModal = () => {
                             ))}
                         </>
                     ) : (
-                        <p style={{ textAlign: 'center' }}>
+                        <NotifText>
                             No Recommendations... Add Some Songs!
-                        </p>
-                    ))}
-            </Songs>
-            <YourSongs>
+                        </NotifText>
+                    )
+                ) : (
+                    <Spinner height={'50px'} width={'6px'} />
+                )}
+            </ContentHalf>
+            <ContentHalf>
                 <h2 ref={yourSongsTop}>Your Songs</h2>
-                {songs.map((song, index) => (
-                    <Song song={song} key={index} type='delete' />
-                ))}
+                {songs.length > 0 ? (
+                    songs.map((song, index) => (
+                        <Song song={song} key={index} type='delete' />
+                    ))
+                ) : (
+                    <>
+                        <Spinner height={'50px'} width={'6px'} />
+                        <br />
+                    </>
+                )}
                 <PaginateNav
                     page={page}
                     maxPages={maxPages}
                     pageChangeMethod={goToPage}
                 />
-            </YourSongs>
+            </ContentHalf>
         </EditWrapper>
     )
 }

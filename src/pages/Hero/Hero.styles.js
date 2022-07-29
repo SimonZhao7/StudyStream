@@ -52,5 +52,5 @@ export const WordAccent = styled.div`
     height: 10px;
     width: 100px;
     border-radius: 3px;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
 `

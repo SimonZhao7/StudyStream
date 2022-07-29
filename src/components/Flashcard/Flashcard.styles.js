@@ -14,7 +14,8 @@ export const FlashcardWrapper = styled.div`
 export const NumberingWrapper = styled.div`
     flex: 1;
     padding: 8px;
-    border-right: 5px solid #ffeb6b;
+    border-right: 5px solid var(--secondary-color);
+    font-size: 25px;
     display: flex;
     align-items: center;
     justify-content: center;

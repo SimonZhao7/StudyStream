@@ -1,5 +1,8 @@
 import React from 'react'
-import { ButtonWrapper, ButtonContent, ButtonSpinner } from './Button.styles'
+// Styles
+import { ButtonWrapper, ButtonContent } from './Button.styles'
+// Components
+import Spinner from '../Spinner'
 
 const Button = ({ label, onClick, width, loading, color, hoverColor, isDisabled, unrounded, textColor, type }) => {
     return (
@@ -15,7 +18,7 @@ const Button = ({ label, onClick, width, loading, color, hoverColor, isDisabled,
                 textColor={textColor}
                 type={type}
             >
-                {loading ? <ButtonSpinner></ButtonSpinner> : label}
+                {loading ? <Spinner /> : label}
             </ButtonContent>
         </ButtonWrapper>
     )

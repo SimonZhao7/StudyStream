@@ -5,13 +5,13 @@ const GlobalStyle = createGlobalStyle`
     * {
         box-sizing: border-box;
         font-family: 'Poppins', sans-serif;
-        --primary-color: #1690c4;
-        --secondary-color: #1dc6cc;
+        --primary-color:  #3F3F93;
+        --secondary-color: #3131A5;
         --primary-color-hover: #137CA9;
-        --secondary-color-hover: #18b0b5;
-        --dark-gray: #292b2c;
-        --error-color: #f20000;
-        --error-color-hover: #d40000;
+        --secondary-color-hover: #21216E;
+        --dark-gray: #252525;
+        --error-color: #DC1818;
+        --error-color-hover: #9F1212;
         --success-color: #5cb85c;
     }
 

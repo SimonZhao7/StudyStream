@@ -13,9 +13,10 @@ export const ButtonContent = styled.button`
     color: ${props => props.textColor ? props.textColor : 'white'};
     background-color: ${props => {
         const { isDisabled, hoverColor, color } = props
-        return isDisabled ? (hoverColor || 'var(--primary-color-hover)') : (color || 'var(--primary-color)')
+        return isDisabled ? (hoverColor || 'var(--secondary-color-hover)') : (color || 'var(--secondary-color)')
     }};
     transition: background-color 0.3s ease;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 
     display: flex;
     justify-content: center;
@@ -24,26 +25,6 @@ export const ButtonContent = styled.button`
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
 
     :hover {
-        background-color: ${props => props.hoverColor || 'var(--primary-color-hover)'};
-    }
-`
-
-export const ButtonSpinner = styled.div`
-    height: 50%;
-    aspect-ratio: 1 / 1;
-    border: solid 3px white;
-    border-top: solid 3px var(--primary-color-hover);
-    border-radius: 50%;
-
-    animation: spin 1s linear infinite;
-
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
+        background-color: ${props => props.hoverColor || 'var(--secondary-color-hover)'};
     }
 `

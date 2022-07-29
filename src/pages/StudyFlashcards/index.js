@@ -9,6 +9,7 @@ import {
     FlashcardNav,
     StudySetContent,
     SpotifyEmbed,
+    VWrapper,
 } from './StudyFlashcards.styles'
 import { MainWrapper } from '../../globalStyles'
 // Redux
@@ -139,16 +140,16 @@ const StudyFlashcards = () => {
                         </section>
                     </StudySetContent>
                 ) : (
-                    <>
+                    <VWrapper>
                         <h1>This study set has no flashcards...</h1>
                         <Button
                             label='Return'
                             color={'var(--secondary-color)'}
                             hoverColor={'var(--secondary-color-hover)'}
-                            width={'15%'}
+                            width={'30%'}
                             onClick={() => navigate(-1)}
                         />
-                    </>
+                    </VWrapper>
                 ))}
         </MainWrapper>
     )

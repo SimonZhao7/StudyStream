@@ -69,3 +69,9 @@ export const SpotifyEmbed = styled.iframe`
     height: 100%;
     border-radius: 10px;
 `
+
+export const VWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`

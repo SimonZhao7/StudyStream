@@ -32,28 +32,30 @@ const UserStudySets = () => {
 
     return (
         <MainWrapper>
-            {!loading && studySets.length > 0 ? (
-                <ListWrapper>
-                    {studySets.map((studySet, index) => (
-                        <StudySet key={index} studySet={studySet} />
-                    ))}
-                    <PaginateNav
-                        page={page}
-                        maxPages={maxPages}
-                        pageChangeMethod={goToPage}
-                    />
-                </ListWrapper>
-            ) : (
-                <MessageWrapper>
-                    <h1>You have not created any study sets!</h1>
-                    <Button
-                        label='Create Study Set'
-                        color={'var(--secondary-color)'}
-                        hoverColor={'var(--secondary-color-hover)'}
-                        width='40%'
-                        onClick={() => navigate('/create')}
-                    />
-                </MessageWrapper>
+            {!loading && (
+                studySets.length > 0 ? (
+                    <ListWrapper>
+                        {studySets.map((studySet, index) => (
+                            <StudySet key={index} studySet={studySet} />
+                        ))}
+                        <PaginateNav
+                            page={page}
+                            maxPages={maxPages}
+                            pageChangeMethod={goToPage}
+                        />
+                    </ListWrapper>
+                ) : (
+                    <MessageWrapper>
+                        <h1>You have not created any study sets!</h1>
+                        <Button
+                            label='Create Study Set'
+                            color={'var(--secondary-color)'}
+                            hoverColor={'var(--secondary-color-hover)'}
+                            width='40%'
+                            onClick={() => navigate('/create')}
+                        />
+                    </MessageWrapper>
+                )
             )}
         </MainWrapper>
     )

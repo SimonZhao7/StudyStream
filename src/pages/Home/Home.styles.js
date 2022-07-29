@@ -13,4 +13,8 @@ export const HomeContent = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    > h1 {
+        font-size: 40px;
+    }
 `

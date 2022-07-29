@@ -16,12 +16,16 @@ export const EditWrapper = styled.section`
     }
 `
 
-export const Songs = styled.section`
+export const ContentHalf = styled.section`
     flex: 1;
     overflow-y: scroll;
+    
+    ::-webkit-scrollbar {
+        display: none;
+    }
 `
 
-export const YourSongs = styled.section`
-    flex: 1;
-    overflow-y: scroll;
+export const NotifText = styled.p`
+    font-size: 18px;
+    text-align: center;
 `
