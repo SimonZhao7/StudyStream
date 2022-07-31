@@ -7,6 +7,7 @@ const initialState = {
     recommendations: [],
     maxPages: 1,
     page: 1,
+    getLoading: true,
 }
 
 export const fetchPlaylistSongs = createAsyncThunk(
@@ -119,12 +120,16 @@ const spotifySlice = createSlice({
         },
     },
     extraReducers: {
+        [fetchPlaylistSongs.pending]: (state) => {
+            state.getLoading = true
+        },
         [fetchPlaylistSongs.fulfilled]: (state, action) => {
             const { spotifyData, tracks, maxPages } = action.payload
             localStorage.setItem('spotify', JSON.stringify(spotifyData))
             state.playlistSongs = tracks.map((track) => track.track)
             state.isFetchSuccessful = true
             state.maxPages = maxPages
+            state.getLoading = false
         },
         [fetchPlaylistSongs.rejected]: () => {
             window.location.href = '/connect'

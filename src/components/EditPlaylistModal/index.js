@@ -23,7 +23,8 @@ const EditPlaylistModal = () => {
     const recommendations = useSelector(
         (state) => state.spotify.recommendations
     )
-    const loading = useSelector((state) => state.spotifySearch.loading)
+    const searchLoading = useSelector((state) => state.spotifySearch.loading)
+    const getLoading = useSelector((state) => state.spotify.getLoading)
     const maxPages = useSelector((state) => state.spotify.maxPages)
     const { _id } = useSelector((state) => state.studySet.studySet)
     const page = useSelector((state) => state.spotify.page)
@@ -47,14 +48,17 @@ const EditPlaylistModal = () => {
 
     useEffect(() => {
         if (searchTerm) {
-            dispatch(
-                search({
-                    searchTerm,
-                    page: searchPage,
-                })
-            )
+            const timer = setTimeout(() => {
+                dispatch(
+                    search({
+                        searchTerm,
+                        page: searchPage,
+                    })
+                )
+            }, 500)
+            searchResultsTop.current.scrollIntoView(true)
+            return () => clearTimeout(timer)
         }
-        searchResultsTop.current.scrollIntoView(true)
     }, [dispatch, searchPage, searchTerm])
 
     useEffect(() => {
@@ -78,7 +82,7 @@ const EditPlaylistModal = () => {
                         onChange: (e) => setSearchTerm(e.target.value),
                     }}
                 />
-                {!loading ? (
+                {!searchLoading ? (
                     searchTerm ? (
                         trackResults.length > 0 ? (
                             <>
@@ -113,21 +117,29 @@ const EditPlaylistModal = () => {
             </ContentHalf>
             <ContentHalf>
                 <h2 ref={yourSongsTop}>Your Songs</h2>
-                {songs.length > 0 ? (
-                    songs.map((song, index) => (
-                        <Song song={song} key={index} type='delete' />
-                    ))
+                {!getLoading ? (
+                    songs.length > 0 ? (
+                        <>
+                            {songs.map((song, index) => (
+                                <Song song={song} key={index} type='delete' />
+                            ))}
+                            <PaginateNav
+                                page={page}
+                                maxPages={maxPages}
+                                pageChangeMethod={goToPage}
+                            />
+                        </>
+                    ) : (
+                        <NotifText>
+                            You don't have any songs in this playlist!
+                        </NotifText>
+                    )
                 ) : (
                     <>
                         <Spinner height={'50px'} width={'6px'} />
                         <br />
                     </>
                 )}
-                <PaginateNav
-                    page={page}
-                    maxPages={maxPages}
-                    pageChangeMethod={goToPage}
-                />
             </ContentHalf>
         </EditWrapper>
     )
