@@ -71,86 +71,94 @@ const StudyFlashcards = () => {
 
     return (
         <MainWrapper>
-            {!loading &&
-                (flashcards.length > 0 ? (
-                    <StudySetContent>
-                        {playlistId && (
-                            <aside>
-                                <SpotifyEmbed
-                                    id='playlist-embed'
-                                    src={`https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator`}
-                                    frameBorder='0'
-                                    allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture'
-                                />
-                            </aside>
-                        )}
+            {!loading && (
+                <>
+                    {flashcards.length > 0 ? (
+                        <StudySetContent>
+                            {playlistId && (
+                                <aside>
+                                    <SpotifyEmbed
+                                        id='playlist-embed'
+                                        src={`https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator`}
+                                        frameBorder='0'
+                                        allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture'
+                                    />
+                                </aside>
+                            )}
 
-                        <section>
-                            <FlashcardWrapper ref={flashcard}>
-                                <Flashcard
-                                    className={`${flipped ? 'flipped' : null}`}
-                                    onClick={handleFlip}
-                                >
-                                    <QuestionWrapper>
-                                        <h2>
-                                            {
-                                                flashcards[flashcardIndex]
-                                                    .question
-                                            }
-                                        </h2>
-                                    </QuestionWrapper>
-                                    <AnswerWrapper>
-                                        {/* Prevent answers from showing on flashcard change */}
-                                        {flipped && (
+                            <section>
+                                <FlashcardWrapper ref={flashcard}>
+                                    <Flashcard
+                                        className={`${
+                                            flipped ? 'flipped' : null
+                                        }`}
+                                        onClick={handleFlip}
+                                    >
+                                        <QuestionWrapper>
                                             <h2>
                                                 {
                                                     flashcards[flashcardIndex]
-                                                        .answer
+                                                        .question
                                                 }
                                             </h2>
-                                        )}
-                                    </AnswerWrapper>
-                                </Flashcard>
-                            </FlashcardWrapper>
-                            <FlashcardNav>
-                                <Button
-                                    label='<'
-                                    onClick={() =>
-                                        handleFlashcardScroll(
-                                            flashcardIndex - 1
-                                        )
-                                    }
-                                    isDisabled={flashcardIndex <= 0}
-                                />
-                                <h3>
-                                    {flashcardIndex + 1} of {flashcards.length}
-                                </h3>
-                                <Button
-                                    label='>'
-                                    onClick={() =>
-                                        handleFlashcardScroll(
-                                            flashcardIndex + 1
-                                        )
-                                    }
-                                    isDisabled={
-                                        flashcardIndex >= flashcards.length - 1
-                                    }
-                                />
-                            </FlashcardNav>
-                        </section>
-                    </StudySetContent>
-                ) : (
-                    <VWrapper>
-                        <h1>This study set has no flashcards...</h1>
-                        <Button
-                            label='Return'
-                            color={'var(--secondary-color)'}
-                            hoverColor={'var(--secondary-color-hover)'}
-                            width={'30%'}
-                            onClick={() => navigate(-1)}
-                        />
-                    </VWrapper>
-                ))}
+                                        </QuestionWrapper>
+                                        <AnswerWrapper>
+                                            {/* Prevent answers from showing on flashcard change */}
+                                            {flipped && (
+                                                <h2>
+                                                    {
+                                                        flashcards[
+                                                            flashcardIndex
+                                                        ].answer
+                                                    }
+                                                </h2>
+                                            )}
+                                        </AnswerWrapper>
+                                    </Flashcard>
+                                </FlashcardWrapper>
+                                <FlashcardNav>
+                                    <Button
+                                        label='<'
+                                        onClick={() =>
+                                            handleFlashcardScroll(
+                                                flashcardIndex - 1
+                                            )
+                                        }
+                                        isDisabled={flashcardIndex <= 0}
+                                    />
+                                    <h3>
+                                        {flashcardIndex + 1} of{' '}
+                                        {flashcards.length}
+                                    </h3>
+                                    <Button
+                                        label='>'
+                                        onClick={() =>
+                                            handleFlashcardScroll(
+                                                flashcardIndex + 1
+                                            )
+                                        }
+                                        isDisabled={
+                                            flashcardIndex >=
+                                            flashcards.length - 1
+                                        }
+                                    />
+                                </FlashcardNav>
+                            </section>
+                        </StudySetContent>
+                    ) : (
+                        <VWrapper>
+                            <h1>This study set has no flashcards...</h1>
+                            <Button
+                                label='Return'
+                                color={'var(--secondary-color)'}
+                                hoverColor={'var(--secondary-color-hover)'}
+                                width={'30%'}
+                                onClick={() => navigate(-1)}
+                            />
+                        </VWrapper>
+                    )}
+                </>
+            )}
         </MainWrapper>
     )
 }

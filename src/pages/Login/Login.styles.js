@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 
 export const LoginFormWrapper = styled.div`
-    width: 500px;
+    width: 550px;
     height: auto;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 3px;
     display: flex;
     align-items: center;
-    padding: 40px 20px;
+    padding: 60px 30px;
     color: var(--dark-gray);
 
     margin-bottom: 100px;

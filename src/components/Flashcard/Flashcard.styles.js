@@ -5,7 +5,7 @@ export const FlashcardWrapper = styled.div`
     background-color: white;
     width: 100%;
     padding: 20px 20px 20px 0;
-    border-radius: 10px;
+    border-radius: 5px;
     color: var(--dark-gray);
     max-height: 250px;
     gap: 20px;

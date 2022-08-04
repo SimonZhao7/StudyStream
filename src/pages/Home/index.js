@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 // Styles
 import { BaseWrapper } from '../../globalStyles'
-import { StudySetsWrapper, HomeContent } from './Home.styles'
+import { StudySetsWrapper, HomeContent, Center } from './Home.styles'
 // Components
 import StudySet from '../../components/StudySet'
 // Redux
@@ -59,10 +59,12 @@ const Home = () => {
                                 </StudySetsWrapper>
                             </>
                         ) : (
-                            <p>
-                                You have no previously viewed study sets. Get
-                                studying!!!
-                            </p>
+                            <Center>
+                                <h1>
+                                    You have no previously viewed study sets.
+                                    Get studying!!!
+                                </h1>
+                            </Center>
                         )}
                     </div>
                 </HomeContent>

@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 
 export const RegisterForm = styled.section`
-    width: 500px;
+    width: 550px;
     height: auto;
-    padding: 40px 20px;
-    border-radius: 10px;
+    padding: 60px 30px;
+    border-radius: 3px;
     
     display: flex;
     align-items: center;

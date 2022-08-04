@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 // Redux
 import { useSelector } from 'react-redux'
@@ -21,6 +21,7 @@ const Navbar = () => {
     const signedIn = useSelector((state) => state.user.signedIn)
     const { userImage } = useSelector((state) => state.user.value)
     const [isUserLinksOpen, setIsUserLinksOpen] = useState(false)
+    const navbar = useRef()
     const userImg = useRef()
     const diamondRef = useRef()
 
@@ -33,15 +34,22 @@ const Navbar = () => {
         }
     }
 
+    const handleWindowClick = (e) => {
+        if (navbar.current && !navbar.current.contains(e.target)) {
+            setIsUserLinksOpen(false)
+        }
+    }
+
     useEffect(() => {
         repositionIcon()
+        window.addEventListener('click', handleWindowClick)
         window.addEventListener('resize', repositionIcon)
         return () => window.removeEventListener('resize', repositionIcon)
     })
 
     return (
         <>
-            <NavWrapper>
+            <NavWrapper ref={navbar}>
                 {!loading && (
                     <>
                         <NavLinks>
@@ -83,7 +91,7 @@ const Navbar = () => {
                     </IconWrapper>
                     <UserLinks>
                         <a href='/settings'>User Settings</a>
-                        <a href='/'>Profile</a>
+                        <a href='/settings'>Profile</a>
                     </UserLinks>
                 </>
             )}

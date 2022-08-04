@@ -77,8 +77,12 @@ const UserSettings = () => {
             })
 
             if (response.status === 200) {
-                setErrors([])
-                setSuccess(true)
+                if (response.data.acknowledged) {
+                    setErrors([])
+                    setSuccess(true)
+                } else {
+                    setErrors([{ message: 'Fields may not be left empty' }])
+                }
             }
         } catch (error) {
             setSuccess(false)

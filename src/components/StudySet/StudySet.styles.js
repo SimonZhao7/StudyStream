@@ -4,7 +4,7 @@ export const StudySetWrapper = styled.div`
     padding: 15px;
     background-color: white;
     color: black;
-    border-radius: 15px;
+    border-radius: 5px;
     display: flex;
 `
 

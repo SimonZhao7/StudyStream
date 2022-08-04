@@ -64,7 +64,8 @@ const FlashcardForm = () => {
     }
 
     return (
-        <FormWrapper>
+        <FormWrapper editing={editingId}>
+            {editingId && <legend>Edit Flashcard</legend>}
             {errors.length > 0 && <Alert text={errors[0]} type='error' />}
             <Input 
                 label='Question'

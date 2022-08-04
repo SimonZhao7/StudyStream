@@ -18,7 +18,7 @@ export const StudySetInfo = styled.section`
     color: var(--dark-gray);
     width: 100%;
     max-height: 300px;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 20px;
 `
 
@@ -49,6 +49,7 @@ export const FlashcardsWrapper = styled.section`
 
 export const LineBreak = styled.hr`
     width: 100%;
-    border: 2px solid var(--secondary-color);
-    border-radius: 2px;
+    border: 3px solid var(--secondary-color);
+    border-radius: 1px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 `

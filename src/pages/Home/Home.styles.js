@@ -18,3 +18,9 @@ export const HomeContent = styled.section`
         font-size: 40px;
     }
 `
+
+export const Center = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`   
