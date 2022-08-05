@@ -12,21 +12,21 @@ import {
     FileInput,
 } from './UserSettings.styles'
 // Redux
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { updateUser, resetFormSettings } from '../../redux/features/userSlice'
 // Icons
 import { BiArrowToLeft, BiArrowToRight } from 'react-icons/bi'
 import { BsFillDiamondFill } from 'react-icons/bs'
-// API
-import AXIOS from '../../api'
 
 const UserSettings = () => {
     const [menuOpen, setMenuOpen] = useState(false)
     const [form, setForm] = useState('username')
     const [formData, setFormData] = useState({})
-    const [errors, setErrors] = useState([])
-    const [processing, setProcessing] = useState(false)
-    const [success, setSuccess] = useState(false)
     const { _id } = useSelector((state) => state.user.value)
+    const processing = useSelector((state) => state.user.processing)
+    const errors = useSelector((state) => state.user.errors)
+    const success = useSelector((state) => state.user.success)
+    const dispatch = useDispatch()
     const menuRef = useRef()
     const formRef = useRef()
     const diamondRef = useRef()
@@ -52,9 +52,8 @@ const UserSettings = () => {
 
     useEffect(() => {
         setFormData({})
-        setErrors([])
-        setSuccess(false)
-    }, [form])
+        dispatch(resetFormSettings())
+    }, [form, dispatch])
 
     const handleChange = (e) => {
         if (e.target.files) {
@@ -66,29 +65,11 @@ const UserSettings = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        setProcessing(true)
-        try {
-            const token = localStorage.getItem('jwt')
-
-            const response = await AXIOS.patch(`/users/${_id}`, formData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-
-            if (response.status === 200) {
-                if (response.data.acknowledged) {
-                    setErrors([])
-                    setSuccess(true)
-                } else {
-                    setErrors([{ message: 'Fields may not be left empty' }])
-                }
-            }
-        } catch (error) {
-            setSuccess(false)
-            setErrors(error.response.data)
-        }
-        setProcessing(false)
+        const body = new FormData()
+        Object.keys(formData).forEach(key => {
+            body.append(key, formData[key])
+        })
+        dispatch(updateUser({ id: _id, body }))
     }
 
     return (
@@ -264,9 +245,9 @@ const UserSettings = () => {
                             onChange={handleChange}
                         />
                         <FileInput>
-                            <label>Choose a File</label>
+                            <label>Choose a file</label>
                             <Button
-                                label={'Choose'}
+                                label={formData.userImage ? formData.userImage.name : 'Choose'}
                                 onClick={() => fileRef.current.click()}
                                 type='button'
                             />
