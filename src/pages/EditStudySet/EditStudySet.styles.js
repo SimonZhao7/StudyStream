@@ -11,6 +11,14 @@ export const StudySetWrapper = styled.section`
     flex-direction: column;
     gap: 15px;
     width: 60%;
+
+    @media screen and (max-width: 992px) {
+        width: 85%;
+    }
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
 `
 
 export const StudySetInfo = styled.section`
@@ -23,10 +31,15 @@ export const StudySetInfo = styled.section`
 `
 
 export const ButtonsWrapper = styled.div`
-    width: 20%;
+    width: 160px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+
+
+    @media screen and (max-width: 576px) {
+        width: 130px;
+    }
 `
 
 export const TitleRow = styled.div`

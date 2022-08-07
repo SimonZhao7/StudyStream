@@ -13,5 +13,13 @@ export const ModalWrapper = styled.section`
 `
 
 export const FormWrapper = styled.div`
-    width: 55%;
+    width: 650px;
+
+    @media screen and (max-width: 992px) {
+        width: 500px;
+    }
+
+    @media screen and (max-width: 576px) {
+        width: 90%;
+    }
 `

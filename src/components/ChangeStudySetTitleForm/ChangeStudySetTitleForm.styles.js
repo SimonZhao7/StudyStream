@@ -6,4 +6,8 @@ export const FormWrapper = styled.form`
     padding: 60px 30px;
     width: 100%;
     border-radius: 3px;
+
+    @media screen and (max-width: 576px) {
+        padding: 60px 15px;
+    }
 `

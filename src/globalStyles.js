@@ -38,12 +38,22 @@ const GlobalStyle = createGlobalStyle`
     a {
         text-decoration: none;
     }
+
+    @media screen and (max-width: 576px) {
+        legend {
+            font-size: 22px;
+        }
+    }
 `
 
 export const BaseWrapper = styled.main`
     width: 100%;
     height: 100%;
     padding: 70px 20px 20px 20px;
+
+    @media screen and (max-width: 576px) {
+        padding: 65px 15px 15px;
+    }
 `
 
 export const MainWrapper = styled(BaseWrapper)`

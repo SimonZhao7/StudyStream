@@ -7,6 +7,14 @@ export const ListWrapper = styled.section`
     flex-direction: column;
     justify-content: flex-start;
     gap: 15px;
+
+    @media screen and (max-width: 992px) {
+        width: 85%;
+    }
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
 `
 
 export const MessageWrapper = styled.section`
