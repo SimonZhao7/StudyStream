@@ -22,15 +22,6 @@ const SearchBar = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const matchInput = () => {
-        const { left, right, bottom } =
-            searchInput.current.getBoundingClientRect()
-        results.current.style.left = `${left}px`
-        results.current.style.top = `${bottom + 10}px`
-        results.current.style.width = `${right - left}px`
-        results.current.style.display = 'block'
-    }
-
     const clearResults = () => {
         setShowResults(false)
         setSearchTerm('')
@@ -40,6 +31,19 @@ const SearchBar = () => {
     useEffect(() => {
         const handleClickEvent = (e) => {
             if (showResults && !results.current.contains(e.target)) {
+                setShowResults(false)
+            }
+        }
+
+        const matchInput = () => {
+            if (window.innerWidth > 768 && showResults) {
+                const { left, right, bottom } =
+                    searchInput.current.getBoundingClientRect()
+                results.current.style.left = `${left}px`
+                results.current.style.top = `${bottom + 10}px`
+                results.current.style.width = `${right - left}px`
+                results.current.style.display = 'block'
+            } else {
                 setShowResults(false)
             }
         }

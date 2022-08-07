@@ -23,6 +23,10 @@ export const IconContainer = styled.i`
     :hover {
         border: solid 2px var(--dark-gray);
     }
+
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
 `
 
 export const SearchInput = styled.input`

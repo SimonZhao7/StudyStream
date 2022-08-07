@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const NavWrapper = styled.header`
     width: 100%;
@@ -14,13 +15,24 @@ export const NavWrapper = styled.header`
 `
 
 export const NavLinks = styled.nav`
-    a {
-        color: white;
-        text-decoration: none;
-    }
     display: flex;
     align-items: center;
     gap: 20px;
+`
+
+export const NavLink = styled(Link)`
+    color: white;
+    text-decoration: none;
+`
+
+export const ResponsiveNavLink = styled(NavLink)`
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+`
+
+export const NavLinkHeader = styled(NavLink)`
+    font-size: 22px;
 `
 
 export const LinkButton = styled.button`
@@ -53,6 +65,16 @@ export const UserImg = styled.img`
     aspect-ratio: 1 / 1;
     object-fit: cover;
     cursor: pointer;
+
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+`
+
+export const MenuIconWrapper = styled.div`
+    @media screen and (min-width: 768px) {
+        display: none;
+    }
 `
 
 export const IconWrapper = styled.div`
@@ -89,5 +111,26 @@ export const UserLinks = styled.div`
 
     a:hover {
         background-color: #f5f5f5;
+    }
+`
+
+export const MenuWrapper = styled.nav`
+    position: absolute;
+    top: 60px;
+    right: 10px;
+
+    width: 200px;
+    padding: 15px;
+    border-radius: 3px;
+    background: var(--primary-color);
+    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+
+    > a {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    > a:last-child {
+        margin-bottom: 0;
     }
 `
