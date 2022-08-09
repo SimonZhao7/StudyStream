@@ -28,17 +28,9 @@ export const StudySetInfo = styled.section`
     max-height: 300px;
     border-radius: 5px;
     padding: 20px;
-`
-
-export const ButtonsWrapper = styled.div`
-    width: 160px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
 
     @media screen and (max-width: 576px) {
-        width: 130px;
+        padding: 15px;
     }
 `
 

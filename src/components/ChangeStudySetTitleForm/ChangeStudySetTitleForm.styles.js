@@ -9,5 +9,6 @@ export const FormWrapper = styled.form`
 
     @media screen and (max-width: 576px) {
         padding: 60px 15px;
+        border-radius: 5px;
     }
 `

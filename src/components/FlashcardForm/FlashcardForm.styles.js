@@ -9,5 +9,6 @@ export const FormWrapper = styled.section`
 
     @media screen and (max-width: 576px) {
         padding: ${props => props.editing ? '50px 15px' : '12px'};
+        border-radius: 5px;
     }
 `

@@ -9,9 +9,13 @@ import {
     QuestionWrapper,
     AnswerWrapper,
 } from './Flashcard.styles'
+import MediaQuery from 'react-responsive'
 // Redux
 import { useDispatch } from 'react-redux'
-import { removeFlashcard, openEditModal } from '../../redux/features/studySetSlice'
+import {
+    removeFlashcard,
+    openEditModal,
+} from '../../redux/features/studySetSlice'
 // Components
 import Button from '../Button'
 // API
@@ -46,19 +50,22 @@ const Flashcard = ({ flashcard, index }) => {
 
     return (
         <FlashcardWrapper>
-            <NumberingWrapper>
-                <h4>{index}</h4>
-            </NumberingWrapper>
+            <MediaQuery minWidth={577}>
+                <NumberingWrapper>
+                    <h4>{index}</h4>
+                </NumberingWrapper>
+            </MediaQuery>
+
             <InfoWrapper>
                 <QuestionWrapper>
-                    <h1>{question}</h1>  
+                    <h1>{question}</h1>
                 </QuestionWrapper>
                 <AnswerWrapper>
                     <h4>{answer}</h4>
                 </AnswerWrapper>
             </InfoWrapper>
             <ButtonsWrapper>
-                <Button label='Edit' onClick={handleEditClick}/>
+                <Button label='Edit' onClick={handleEditClick} />
                 <Button
                     label='Delete'
                     color={'var(--error-color)'}
@@ -66,6 +73,12 @@ const Flashcard = ({ flashcard, index }) => {
                     onClick={handleDelete}
                 />
             </ButtonsWrapper>
+
+            <MediaQuery and maxWidth={576}>
+                <NumberingWrapper>
+                    <h4>{index}</h4>
+                </NumberingWrapper>
+            </MediaQuery>
         </FlashcardWrapper>
     )
 }

@@ -5,12 +5,12 @@ import {
     EditWrapper,
     StudySetInfo,
     TitleRow,
-    ButtonsWrapper,
     StatsRow,
     StudySetWrapper,
     FlashcardsWrapper,
     LineBreak,
 } from './EditStudySet.styles'
+import MediaQuery from 'react-responsive'
 // Components
 import Button from '../../components/Button'
 import FlashcardForm from '../../components/FlashcardForm'
@@ -19,16 +19,13 @@ import FlashcardEditModal from '../../components/FlashcardEditModal'
 import AddPlaylistForm from '../../components/AddPlaylistForm'
 import EditPlaylistModal from '../../components/EditPlaylistModal'
 import ChangeStudySetTitleForm from '../../components/ChangeStudySetTitleForm'
+import StudySetEditRow from '../../components/StudySetEditRow'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import {
     fetchStudySet,
-    openPlaylistModal,
-    openEditTitleModal,
     showFlashcardForm,
 } from '../../redux/features/studySetSlice'
-import { deleteStudySet } from '../../redux/features/studySetsSlice'
-import { openEditModal } from '../../redux/features/spotifySlice'
 
 const EditStudySet = () => {
     const { id } = useParams()
@@ -47,12 +44,9 @@ const EditStudySet = () => {
     const editTitleModalOpen = useSelector(
         (state) => state.studySet.editTitleModalOpen
     )
-    const {
-        _id: studySetId,
-        title,
-        flashcards,
-        playlistId,
-    } = useSelector((state) => state.studySet.studySet)
+    const { title, flashcards } = useSelector(
+        (state) => state.studySet.studySet
+    )
     const token = localStorage.getItem('jwt')
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -75,50 +69,33 @@ const EditStudySet = () => {
                             <StudySetInfo>
                                 <TitleRow>
                                     <h1>{title}</h1>
-                                    <ButtonsWrapper>
-                                        <Button
-                                            label='Change Title'
-                                            onClick={() =>
-                                                dispatch(openEditTitleModal())
-                                            }
-                                        />
-                                        <Button
-                                            label='Delete'
-                                            color={'var(--error-color)'}
-                                            hoverColor={
-                                                'var(--error-color-hover)'
-                                            }
-                                            onClick={() => {
-                                                dispatch(
-                                                    deleteStudySet(studySetId)
-                                                )
-                                                navigate('/my-studysets')
-                                            }}
-                                        />
-                                        {playlistId ? (
-                                            <Button
-                                                label='Edit Playlist'
-                                                onClick={() =>
-                                                    dispatch(openEditModal())
-                                                }
-                                            />
-                                        ) : (
-                                            <Button
-                                                label='Add Playlist'
-                                                onClick={() =>
-                                                    dispatch(
-                                                        openPlaylistModal()
-                                                    )
-                                                }
-                                            />
-                                        )}
-                                    </ButtonsWrapper>
+
+                                    <MediaQuery minWidth={577}>
+                                        <StudySetEditRow />
+                                    </MediaQuery>
+
+                                    <MediaQuery maxWidth={576}>
+                                        <StatsRow>
+                                            <h4>
+                                                Flashcards:{' '}
+                                                {flashcards.length || 0}
+                                            </h4>
+                                        </StatsRow>
+                                    </MediaQuery>
                                 </TitleRow>
-                                <StatsRow>
-                                    <h4>
-                                        Flashcards: {flashcards.length || 0}
-                                    </h4>
-                                </StatsRow>
+
+                                <MediaQuery minWidth={577}>
+                                    <StatsRow>
+                                        <h4>
+                                            Flashcards: {flashcards.length || 0}
+                                        </h4>
+                                    </StatsRow>
+                                </MediaQuery>
+
+                                <MediaQuery maxWidth={576}>
+                                    <br />
+                                    <StudySetEditRow />
+                                </MediaQuery>
                             </StudySetInfo>
                             <LineBreak />
                             <FlashcardsWrapper>
