@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 // Styles
-import { EditWrapper, ContentHalf, NotifText } from './EditPlaylistModal.styles'
+import {
+    EditWrapper,
+    ContentHalf,
+    NotifText,
+    MobileMenu,
+    MenuActions,
+} from './EditPlaylistModal.styles'
+import MediaQuery from 'react-responsive'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -16,7 +23,10 @@ import {
 import Song from '../Song'
 import PaginateNav from '../PaginateNav'
 import Input from '../Input'
+import Button from '../Button'
 import Spinner from '../Spinner'
+// Icons
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 
 const EditPlaylistModal = () => {
     const songs = useSelector((state) => state.spotify.playlistSongs)
@@ -34,6 +44,8 @@ const EditPlaylistModal = () => {
         (state) => state.spotifySearch.trackResults
     )
     const [searchTerm, setSearchTerm] = useState('')
+    const [showSongs, setShowSongs] = useState(false)
+    const [menuOpen, setMenuOpen] = useState(false)
     const yourSongsTop = useRef()
     const searchResultsTop = useRef()
     const dispatch = useDispatch()
@@ -74,73 +86,190 @@ const EditPlaylistModal = () => {
 
     return (
         <EditWrapper>
-            <ContentHalf>
-                <h2 ref={searchResultsTop}>Add Songs</h2>
-                <Input
-                    attrs={{
-                        placeHolder: 'Search For A Song...',
-                        onChange: (e) => setSearchTerm(e.target.value),
-                    }}
-                />
-                {!searchLoading ? (
-                    searchTerm ? (
-                        trackResults.length > 0 ? (
+            <MediaQuery minWidth={577}>
+                <ContentHalf>
+                    <h2 ref={searchResultsTop}>Add Songs</h2>
+                    <Input
+                        attrs={{
+                            placeHolder: 'Search For A Song...',
+                            onChange: (e) => setSearchTerm(e.target.value),
+                        }}
+                    />
+                    {!searchLoading ? (
+                        searchTerm ? (
+                            trackResults.length > 0 ? (
+                                <>
+                                    <h3>Results</h3>
+                                    {trackResults.map((track, index) => (
+                                        <Song song={track} key={index} />
+                                    ))}
+                                    <PaginateNav
+                                        page={searchPage}
+                                        maxPages={maxSearchPages}
+                                        pageChangeMethod={goToResultPage}
+                                    />
+                                </>
+                            ) : (
+                                <NotifText>No Results...</NotifText>
+                            )
+                        ) : recommendations.length > 0 ? (
                             <>
-                                <h3>Results</h3>
-                                {trackResults.map((track, index) => (
-                                    <Song song={track} key={index} />
+                                <h3>Recommendations</h3>
+                                {recommendations.map(
+                                    (recommendation, index) => (
+                                        <Song
+                                            song={recommendation}
+                                            key={index}
+                                        />
+                                    )
+                                )}
+                            </>
+                        ) : (
+                            <NotifText>
+                                No Recommendations... Add Some Songs!
+                            </NotifText>
+                        )
+                    ) : (
+                        <Spinner height={'50px'} width={'6px'} />
+                    )}
+                </ContentHalf>
+                <ContentHalf>
+                    <h2 ref={yourSongsTop}>Your Songs</h2>
+                    {!getLoading ? (
+                        songs.length > 0 ? (
+                            <>
+                                {songs.map((song, index) => (
+                                    <Song
+                                        song={song}
+                                        key={index}
+                                        type='delete'
+                                    />
                                 ))}
                                 <PaginateNav
-                                    page={searchPage}
-                                    maxPages={maxSearchPages}
-                                    pageChangeMethod={goToResultPage}
+                                    page={page}
+                                    maxPages={maxPages}
+                                    pageChangeMethod={goToPage}
                                 />
                             </>
                         ) : (
-                            <NotifText>No Results...</NotifText>
+                            <NotifText>
+                                You don't have any songs in this playlist!
+                            </NotifText>
                         )
-                    ) : recommendations.length > 0 ? (
+                    ) : (
                         <>
-                            <h3>Recommendations</h3>
-                            {recommendations.map((recommendation, index) => (
-                                <Song song={recommendation} key={index} />
-                            ))}
+                            <Spinner height={'50px'} width={'6px'} />
+                            <br />
+                        </>
+                    )}
+                </ContentHalf>
+            </MediaQuery>
+            <MediaQuery maxWidth={576}>
+                <MobileMenu onClick={() => setMenuOpen(!menuOpen)}>
+                    {menuOpen ? (
+                        <>
+                            <IoIosArrowForward size={30} />
+                            <MenuActions>
+                                <Button
+                                    label={'Search'}
+                                    unrounded={true}
+                                    style={{ padding: '15px 20px' }}
+                                    hoverColor={'var(--secondary-color-hover)'}
+                                    onClick={() => setShowSongs(false)}
+                                />
+                                <Button
+                                    label={'Songs'}
+                                    unrounded={true}
+                                    style={{ padding: '15px 20px' }}
+                                    hoverColor={'var(--secondary-color-hover)'}
+                                    onClick={() => setShowSongs(true)}
+                                />
+                            </MenuActions>
                         </>
                     ) : (
-                        <NotifText>
-                            No Recommendations... Add Some Songs!
-                        </NotifText>
-                    )
+                        <IoIosArrowBack size={30} />
+                    )}
+                </MobileMenu>
+                {showSongs ? (
+                    <ContentHalf>
+                        <h2 ref={yourSongsTop}>Your Songs</h2>
+                        {!getLoading ? (
+                            songs.length > 0 ? (
+                                <>
+                                    {songs.map((song, index) => (
+                                        <Song
+                                            song={song}
+                                            key={index}
+                                            type='delete'
+                                        />
+                                    ))}
+                                    <PaginateNav
+                                        page={page}
+                                        maxPages={maxPages}
+                                        pageChangeMethod={goToPage}
+                                    />
+                                </>
+                            ) : (
+                                <NotifText>
+                                    You don't have any songs in this playlist!
+                                </NotifText>
+                            )
+                        ) : (
+                            <>
+                                <Spinner height={'50px'} width={'6px'} />
+                                <br />
+                            </>
+                        )}
+                    </ContentHalf>
                 ) : (
-                    <Spinner height={'50px'} width={'6px'} />
+                    <ContentHalf>
+                        <h2 ref={searchResultsTop}>Add Songs</h2>
+                        <Input
+                            attrs={{
+                                placeHolder: 'Search For A Song...',
+                                onChange: (e) => setSearchTerm(e.target.value),
+                            }}
+                        />
+                        {!searchLoading ? (
+                            searchTerm ? (
+                                trackResults.length > 0 ? (
+                                    <>
+                                        <h3>Results</h3>
+                                        {trackResults.map((track, index) => (
+                                            <Song song={track} key={index} />
+                                        ))}
+                                        <PaginateNav
+                                            page={searchPage}
+                                            maxPages={maxSearchPages}
+                                            pageChangeMethod={goToResultPage}
+                                        />
+                                    </>
+                                ) : (
+                                    <NotifText>No Results...</NotifText>
+                                )
+                            ) : recommendations.length > 0 ? (
+                                <>
+                                    <h3>Recommendations</h3>
+                                    {recommendations.map(
+                                        (recommendation, index) => (
+                                            <Song
+                                                song={recommendation}
+                                                key={index}
+                                            />
+                                        )
+                                    )}
+                                </>
+                            ) : (
+                                <NotifText>
+                                    No Recommendations... Add Some Songs!
+                                </NotifText>
+                            )
+                        ) : (
+                            <Spinner height={'50px'} width={'6px'} />
+                        )}
+                    </ContentHalf>
                 )}
-            </ContentHalf>
-            <ContentHalf>
-                <h2 ref={yourSongsTop}>Your Songs</h2>
-                {!getLoading ? (
-                    songs.length > 0 ? (
-                        <>
-                            {songs.map((song, index) => (
-                                <Song song={song} key={index} type='delete' />
-                            ))}
-                            <PaginateNav
-                                page={page}
-                                maxPages={maxPages}
-                                pageChangeMethod={goToPage}
-                            />
-                        </>
-                    ) : (
-                        <NotifText>
-                            You don't have any songs in this playlist!
-                        </NotifText>
-                    )
-                ) : (
-                    <>
-                        <Spinner height={'50px'} width={'6px'} />
-                        <br />
-                    </>
-                )}
-            </ContentHalf>
+            </MediaQuery>
         </EditWrapper>
     )
 }

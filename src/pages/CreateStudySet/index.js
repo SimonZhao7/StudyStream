@@ -43,6 +43,7 @@ const CreateStudySet = () => {
             if (response.status === 201) {
                 const { _id: id } = response.data
                 navigate(`/edit/${id}`)
+                return
             }
         } catch (error) {
             setErrors(error.response.data)

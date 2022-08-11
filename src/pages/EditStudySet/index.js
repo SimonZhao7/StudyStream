@@ -134,7 +134,7 @@ const EditStudySet = () => {
                 </FlashcardEditModal>
             )}
             {editPlaylistModalOpen && (
-                <FlashcardEditModal>
+                <FlashcardEditModal special={true}>
                     <EditPlaylistModal />
                 </FlashcardEditModal>
             )}

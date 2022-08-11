@@ -35,7 +35,8 @@ const AddPlaylistForm = () => {
             const token = localStorage.getItem('jwt')
             const response = await AXIOS.post(
                 `/spotify/playlists`,
-                { ...formData, spotifyData, studySetId }, {
+                { ...formData, spotifyData, studySetId },
+                {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -43,9 +44,13 @@ const AddPlaylistForm = () => {
             )
 
             if (response.status === 201) {
-                localStorage.setItem('spotify', JSON.stringify(response.data.spotifyData))
+                localStorage.setItem(
+                    'spotify',
+                    JSON.stringify(response.data.spotifyData)
+                )
                 dispatch(closeModals())
                 dispatch(fetchStudySet(studySetId))
+                return
             }
         } catch (error) {
             const currentError = error.response

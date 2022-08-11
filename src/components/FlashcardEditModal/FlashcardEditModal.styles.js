@@ -13,10 +13,10 @@ export const ModalWrapper = styled.section`
 `
 
 export const FormWrapper = styled.div`
-    width: 650px;
+    width: ${props => props.special ? '700px': '650px'};
 
-    @media screen and (max-width: 992px) {
-        width: 500px;
+    @media screen and (max-width: 768px) {
+        width: ${props => props.special ? '90%' : '500px'};
     }
 
     @media screen and (max-width: 576px) {

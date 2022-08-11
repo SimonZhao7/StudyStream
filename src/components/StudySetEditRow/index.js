@@ -6,7 +6,8 @@ import { ButtonsWrapper } from './StudySetEditRow.styles'
 import Button from '../Button'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { openEditModal, openEditTitleModal, openPlaylistModal } from '../../redux/features/studySetSlice'
+import { openEditTitleModal, openPlaylistModal } from '../../redux/features/studySetSlice'
+import { openEditModal } from '../../redux/features/spotifySlice'
 import { deleteStudySet } from '../../redux/features/studySetsSlice'
 
 const StudySetEditRow = () => {
