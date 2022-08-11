@@ -24,6 +24,34 @@ export const HeroFilter = styled.div`
         width: 475px;
         font-size: 22px;
     }
+
+    button {
+        width: 20%;
+    }
+
+    @media screen and (max-width: 768px) {
+        h1 {
+            font-size: 38px;
+            width: 100%;
+        }
+
+        h3 {
+            font-size: 18px;
+            width: 100%;
+        }
+
+        button {
+            width: 50%;
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        padding: 75px 30px 75px;
+        
+        button {
+            width: 200px;
+        }
+    }
 `
 
 export const BenefitsWrapper = styled.section`
@@ -32,6 +60,14 @@ export const BenefitsWrapper = styled.section`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 30px;
+
+    @media screen and (max-width: 768px) {
+        margin-top: 100px;
+    }
+
+    @media screen and (max-width: 576px) {
+        grid-template-columns: 1fr;
+    }
 `
 
 export const BenefitWrapper = styled.div`
@@ -45,6 +81,10 @@ export const BenefitWrapper = styled.div`
 
     h2, h3 {
         width: 100%;
+    }
+
+    @media screen and (max-width: 768px) {
+        font-size: 32px;
     }
 `
 

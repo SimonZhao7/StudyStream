@@ -21,7 +21,7 @@ const Hero = () => {
                     users.
                 </h3>
                 <a href='/login'>
-                    <Button label='Get Started' width='20%' />
+                    <Button label='Get Started' />
                 </a>
                 <BenefitsWrapper>
                     <BenefitWrapper>
