@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 // Styles
 import {
+    FlashcardSection,
     FlashcardWrapper,
     Flashcard,
     QuestionWrapper,
@@ -12,6 +13,7 @@ import {
     VWrapper,
 } from './StudyFlashcards.styles'
 import { MainWrapper } from '../../globalStyles'
+import MediaQuery from 'react-responsive'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchStudySet } from '../../redux/features/studySetSlice'
@@ -75,18 +77,20 @@ const StudyFlashcards = () => {
                 <>
                     {flashcards.length > 0 ? (
                         <StudySetContent>
-                            {playlistId && (
-                                <aside>
-                                    <SpotifyEmbed
-                                        id='playlist-embed'
-                                        src={`https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator`}
-                                        frameBorder='0'
-                                        allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture'
-                                    />
-                                </aside>
-                            )}
+                            <MediaQuery minWidth={1201}>
+                                {playlistId && (
+                                    <aside>
+                                        <SpotifyEmbed
+                                            id='playlist-embed'
+                                            src={`https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator`}
+                                            frameBorder='0'
+                                            allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture'
+                                        />
+                                    </aside>
+                                )}
+                            </MediaQuery>
 
-                            <section>
+                            <FlashcardSection>
                                 <FlashcardWrapper ref={flashcard}>
                                     <Flashcard
                                         className={`${
@@ -143,7 +147,19 @@ const StudyFlashcards = () => {
                                         }
                                     />
                                 </FlashcardNav>
-                            </section>
+                                <MediaQuery maxWidth={1200}>
+                                    {playlistId && (
+                                        <aside>
+                                            <SpotifyEmbed
+                                                id='playlist-embed'
+                                                src={`https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator`}
+                                                frameBorder='0'
+                                                allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture'
+                                            />
+                                        </aside>
+                                    )}
+                                </MediaQuery>
+                            </FlashcardSection>
                         </StudySetContent>
                     ) : (
                         <VWrapper>
