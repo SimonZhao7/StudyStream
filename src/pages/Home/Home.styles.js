@@ -6,6 +6,10 @@ export const StudySetsWrapper = styled.section`
     grid-template-rows: repeat(2, auto);
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     grid-gap: 15px;
+
+    @media screen and (min-width: 1200px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
 `
 
 export const HomeContent = styled.section`

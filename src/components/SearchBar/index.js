@@ -13,7 +13,7 @@ import { fetchSearchSet } from '../../redux/features/searchSetSlice'
 // Components
 import Button from '../Button'
 
-const SearchBar = () => {
+const SearchBar = ({ overrideResponsive }) => {
     const [searchTerm, setSearchTerm] = useState('')
     const [showResults, setShowResults] = useState(false)
     const searchResults = useSelector((state) => state.searchSet.value)
@@ -75,7 +75,7 @@ const SearchBar = () => {
     return (
         <>
             <SearchForm ref={searchInput} onSubmit={handleSubmit}>
-                <IconContainer className='fa-solid fa-magnifying-glass'>
+                <IconContainer className='fa-solid fa-magnifying-glass' override={overrideResponsive}>
                     <SearchInput
                         placeholder='Search Study Sets'
                         value={searchTerm}

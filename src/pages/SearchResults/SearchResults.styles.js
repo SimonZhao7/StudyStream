@@ -5,6 +5,14 @@ export const ResultsWrapper = styled.section`
     display: flex;
     flex-direction: column;
     gap: 15px;
+
+    @media screen and (max-width: 982px) {
+        width: 85%;
+    }
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
 `
 
 export const NoResultWrapper = styled.div`

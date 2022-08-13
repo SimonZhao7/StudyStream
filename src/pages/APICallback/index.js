@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import AXIOS from '../../api'
 // Styles
 import { MainWrapper } from '../../globalStyles'
+import { SuccessMsg } from './APICallback.styles'
 
 const APICallback = () => {
     const searchParams = useSearchParams()[0]
@@ -39,7 +40,7 @@ const APICallback = () => {
     return (
         <MainWrapper>
             {!loading &&
-                <h1>You have successfully connected to your Spotify Account</h1>
+                <SuccessMsg>You have successfully connected to your Spotify Account</SuccessMsg>
             }
         </MainWrapper>
     )

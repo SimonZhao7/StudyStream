@@ -6,7 +6,7 @@ const NotFoundPage = () => {
     return (
         <MainWrapper>
             <NotFoundContent>
-                <h1 style={{fontSize: '60px'}}>Whoops...</h1>
+                <h1>Whoops...</h1>
                 <h1>The page you are looking for does not exist.</h1>
             </NotFoundContent>
         </MainWrapper>

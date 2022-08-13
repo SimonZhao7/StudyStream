@@ -11,6 +11,7 @@ import {
     IconWrapper,
     FileInput,
 } from './UserSettings.styles'
+import MediaQuery from 'react-responsive'
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { updateUser, resetFormSettings } from '../../redux/features/userSlice'
@@ -35,11 +36,12 @@ const UserSettings = () => {
     const positionMenu = () => {
         if (menuOpen) {
             const { left, top } = formRef.current.getBoundingClientRect()
-            menuRef.current.style.left = `${left - 170}px`
+            const leftOffset = window.innerWidth < 982 ? 60 : -170
+            menuRef.current.style.left = `${left + leftOffset}px`
             menuRef.current.style.top = `${top}px`
-            const { right } = menuRef.current.getBoundingClientRect()
+            const { left: menuLeft, right } = menuRef.current.getBoundingClientRect()
             const diamondStyles = diamondRef.current.style
-            diamondStyles.left = `${right - 10}px`
+            diamondStyles.left = window.innerWidth < 982 ? `${menuLeft - 10}px` : `${right - 10}px`
             diamondStyles.top = `${top + 10}px`
         }
     }
@@ -53,6 +55,7 @@ const UserSettings = () => {
     useEffect(() => {
         setFormData({})
         dispatch(resetFormSettings())
+        setMenuOpen(false)
     }, [form, dispatch])
 
     const handleChange = (e) => {
@@ -66,7 +69,7 @@ const UserSettings = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const body = new FormData()
-        Object.keys(formData).forEach(key => {
+        Object.keys(formData).forEach((key) => {
             body.append(key, formData[key])
         })
         dispatch(updateUser({ id: _id, body }))
@@ -247,7 +250,11 @@ const UserSettings = () => {
                         <FileInput>
                             <label>Choose a file</label>
                             <Button
-                                label={formData.userImage ? formData.userImage.name : 'Choose'}
+                                label={
+                                    formData.userImage
+                                        ? formData.userImage.name
+                                        : 'Choose'
+                                }
                                 onClick={() => fileRef.current.click()}
                                 type='button'
                             />
@@ -255,19 +262,36 @@ const UserSettings = () => {
                     </>
                 )}
                 <Button label={'Confirm Change'} loading={processing} />
-                {menuOpen ? (
-                    <BiArrowToRight
-                        color='var(--dark-gray)'
-                        size={30}
-                        onClick={() => setMenuOpen(false)}
-                    />
-                ) : (
-                    <BiArrowToLeft
-                        color='var(--dark-gray)'
-                        size={30}
-                        onClick={() => setMenuOpen(true)}
-                    />
-                )}
+                <MediaQuery minWidth={982}>
+                    {menuOpen ? (
+                        <BiArrowToRight
+                            color='var(--dark-gray)'
+                            size={30}
+                            onClick={() => setMenuOpen(false)}
+                        />
+                    ) : (
+                        <BiArrowToLeft
+                            color='var(--dark-gray)'
+                            size={30}
+                            onClick={() => setMenuOpen(true)}
+                        />
+                    )}
+                </MediaQuery>
+                <MediaQuery maxWidth={981}>
+                    {menuOpen ? (
+                        <BiArrowToLeft
+                            color='var(--dark-gray)'
+                            size={30}
+                            onClick={() => setMenuOpen(false)}
+                        />
+                    ) : (
+                        <BiArrowToRight
+                            color='var(--dark-gray)'
+                            size={30}
+                            onClick={() => setMenuOpen(true)}
+                        />
+                    )}
+                </MediaQuery>
             </FormWrapper>
         </MainWrapper>
     )

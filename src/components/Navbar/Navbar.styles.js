@@ -72,7 +72,7 @@ export const UserImg = styled.img`
 `
 
 export const MenuIconWrapper = styled.div`
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 769px) {
         display: none;
     }
 `
@@ -116,14 +116,14 @@ export const UserLinks = styled.div`
 
 export const MenuWrapper = styled.nav`
     position: absolute;
-    top: 60px;
+    top: 50px;
     right: 10px;
 
     width: 200px;
     padding: 15px;
-    border-radius: 3px;
+    border-radius: 0 0 3px 3px;
     background: var(--primary-color);
-    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 
     > a {
         display: block;
@@ -133,4 +133,16 @@ export const MenuWrapper = styled.nav`
     > a:last-child {
         margin-bottom: 0;
     }
+`
+
+export const MenuImgWrapper = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    
+    width: 100%;
+`
+
+export const MenuImg = styled(UserImg)`
+    display: block;
+    margin-top: 10px;
 `

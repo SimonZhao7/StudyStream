@@ -25,7 +25,7 @@ export const IconContainer = styled.i`
     }
 
     @media screen and (max-width: 768px) {
-        display: none;
+        display: ${props => props.override ? 'flex' : 'none'};
     }
 `
 

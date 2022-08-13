@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../../components/Button'
 import { MainWrapper } from '../../globalStyles'
 
 const APIConnect = () => {
@@ -13,7 +14,7 @@ const APIConnect = () => {
                     show_dialog: true,
                 })
             }`}
-            ><button>Connect to Spotify</button></a>
+            ><Button label='Connect to Spotify' style={{ width: '300px'}}/></a>
         </MainWrapper> 
     )
 }

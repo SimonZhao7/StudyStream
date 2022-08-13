@@ -14,6 +14,8 @@ import {
     IconWrapper,
     MenuIconWrapper,
     MenuWrapper,
+    MenuImgWrapper,
+    MenuImg,
 } from './Navbar.styles'
 // Components
 import SearchBar from '../SearchBar'
@@ -58,17 +60,20 @@ const Navbar = () => {
         ) {
             setIsUserLinksOpen(false)
         }
-        
-        if (menuRef.current && !menuIcon.current.contains(e.target)) {
+
+        if (menuRef.current && !menuRef.current.contains(e.target)) {
             setMenuOpen(false)
         }
     }
 
     useEffect(() => {
         repositionIcon()
-        window.addEventListener('click', handleWindowClick)
+        window.addEventListener('click', handleWindowClick, { capture: true })
         window.addEventListener('resize', repositionIcon)
-        return () => window.removeEventListener('resize', repositionIcon)
+        return () => { 
+            window.removeEventListener('resize', repositionIcon)
+            window.removeEventListener('click', handleWindowClick, { capture: true })
+        }
     })
 
     return (
@@ -139,14 +144,11 @@ const Navbar = () => {
                         {signedIn ? (
                             <>
                                 <NavLink to='/logout'>Logout</NavLink>
-                                <UserImg
-                                    src={userImage}
-                                    ref={userImg}
-                                    alt='user img'
-                                    onClick={() =>
-                                        setIsUserLinksOpen(!isUserLinksOpen)
-                                    }
-                                />
+                                <NavLink to='/settings'>User Settings</NavLink>
+                                <SearchBar overrideResponsive={true} />
+                                <MenuImgWrapper>
+                                    <MenuImg src={userImage} alt='user img' />
+                                </MenuImgWrapper>
                             </>
                         ) : (
                             <>
