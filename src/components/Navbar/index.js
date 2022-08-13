@@ -22,6 +22,7 @@ import SearchBar from '../SearchBar'
 // Icons
 import { BsFillDiamondFill } from 'react-icons/bs'
 import { AiOutlineMenu } from 'react-icons/ai'
+import { MdOutlineCancel } from 'react-icons/md'
 
 const Navbar = () => {
     const loading = useSelector((state) => state.user.loading)
@@ -70,9 +71,11 @@ const Navbar = () => {
         repositionIcon()
         window.addEventListener('click', handleWindowClick, { capture: true })
         window.addEventListener('resize', repositionIcon)
-        return () => { 
+        return () => {
             window.removeEventListener('resize', repositionIcon)
-            window.removeEventListener('click', handleWindowClick, { capture: true })
+            window.removeEventListener('click', handleWindowClick, {
+                capture: true,
+            })
         }
     })
 
@@ -118,10 +121,17 @@ const Navbar = () => {
                                 </>
                             )}
                             <MenuIconWrapper ref={menuIcon}>
-                                <AiOutlineMenu
-                                    size={25}
-                                    onClick={() => setMenuOpen(!menuOpen)}
-                                />
+                                {menuOpen ? (
+                                    <MdOutlineCancel
+                                        size={25}
+                                        onClick={() => setMenuOpen(false)}
+                                    />
+                                ) : (
+                                    <AiOutlineMenu
+                                        size={25}
+                                        onClick={() => setMenuOpen(true)}
+                                    />
+                                )}
                             </MenuIconWrapper>
                         </NavLinks>
                     </>

@@ -25,6 +25,7 @@ export const NoResultWrapper = styled.div`
 
     h1 {
         font-size: 40px;
+        text-align: center;
     }
 `
 

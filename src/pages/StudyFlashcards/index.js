@@ -78,7 +78,7 @@ const StudyFlashcards = () => {
                     {flashcards.length > 0 ? (
                         <StudySetContent>
                             <MediaQuery minWidth={1201}>
-                                {playlistId && (
+                                {playlistId ? (
                                     <aside>
                                         <SpotifyEmbed
                                             id='playlist-embed'
@@ -87,7 +87,7 @@ const StudyFlashcards = () => {
                                             allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture'
                                         />
                                     </aside>
-                                )}
+                                ) : null}
                             </MediaQuery>
 
                             <FlashcardSection>
@@ -148,7 +148,7 @@ const StudyFlashcards = () => {
                                     />
                                 </FlashcardNav>
                                 <MediaQuery maxWidth={1200}>
-                                    {playlistId && (
+                                    {playlistId ? (
                                         <aside>
                                             <SpotifyEmbed
                                                 id='playlist-embed'
@@ -157,7 +157,7 @@ const StudyFlashcards = () => {
                                                 allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture'
                                             />
                                         </aside>
-                                    )}
+                                    ) : null}
                                 </MediaQuery>
                             </FlashcardSection>
                         </StudySetContent>

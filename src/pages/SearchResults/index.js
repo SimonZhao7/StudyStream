@@ -48,7 +48,7 @@ const SearchResults = () => {
                         label='Return'
                         color={'var(--secondary-color)'}
                         hoverColor={'var(--secondary-color-hover)'}
-                        width={'15%'}
+                        width={'150px'}
                         onClick={() => navigate(-1)}
                     />
                 </NoResultWrapper>

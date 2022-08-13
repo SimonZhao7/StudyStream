@@ -12,6 +12,10 @@ export const LoginFormWrapper = styled.div`
     color: var(--dark-gray);
 
     margin-bottom: 100px;
+
+    @media screen and (max-width: 576px) {
+        padding: 40px 15px;
+    }
 `
 
 export const LoginForm = styled.form`

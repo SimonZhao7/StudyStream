@@ -12,6 +12,10 @@ export const RegisterForm = styled.section`
 
     background-color: white;
     color: var(--dark-gray);
+
+    @media screen and (max-width: 576px) {
+        padding: 40px 15px;
+    }
 `
 
 export const FormContent = styled.form`
