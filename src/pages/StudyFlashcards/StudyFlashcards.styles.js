@@ -5,45 +5,46 @@ export const StudySetContent = styled.section`
     justify-content: center;
     gap: 50px;
     width: 100%;
+
+    @media screen and (max-width: 1200px) {
+        display: block;
+    }
 `
 
 export const FlashcardSection = styled.section`
     width: 800px;
     height: auto;
     aspect-ratio: 8 / 5;
+    perspective: 2000px;
 
     @media screen and (max-width: 1200px) {
-        width: 600px;
+        max-width: 600px;
+        width: 100%;
+        margin: auto;
     }
-`
-
-export const FlashcardWrapper = styled.section`
-    width: 100%;
-    height: 100%;
-    color: var(--dark-gray);
-
-    perspective: 2000px;
 
     .flipped {
         transform: rotateX(180deg);
     }
 `
 
-export const Flashcard = styled.div`
-    background-color: white;
+export const FlashcardWrapper = styled.section`
+    position: relative;
     width: 100%;
     height: 100%;
-    border-radius: 10px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    color: var(--dark-gray);
 
     transition: transform 0.5s ease;
     transform-style: preserve-3d;
 
-    div {
+    > div {
         position: absolute;
+        background-color: white;
         width: 100%;
         height: 100%;
         padding: 20px;
+        border-radius: 10px;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
 
         display: flex;
         align-items: center;

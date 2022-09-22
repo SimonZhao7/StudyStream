@@ -4,7 +4,6 @@ import { useParams, useNavigate } from 'react-router-dom'
 import {
     FlashcardSection,
     FlashcardWrapper,
-    Flashcard,
     QuestionWrapper,
     AnswerWrapper,
     FlashcardNav,
@@ -37,7 +36,7 @@ const StudyFlashcards = () => {
     const handleFlip = () => {
         if (canFlip) {
             setCanFlip(false)
-            setFlipped((prev) => !prev)
+            setFlipped(!flipped)
             setTimeout(() => {
                 setCanFlip(true)
             }, 500)
@@ -91,34 +90,29 @@ const StudyFlashcards = () => {
                             </MediaQuery>
 
                             <FlashcardSection>
-                                <FlashcardWrapper ref={flashcard}>
-                                    <Flashcard
-                                        className={`${
-                                            flipped ? 'flipped' : null
-                                        }`}
-                                        onClick={handleFlip}
-                                    >
-                                        <QuestionWrapper>
+                                <FlashcardWrapper
+                                    ref={flashcard}
+                                    className={`${flipped ? 'flipped' : null}`}
+                                    onClick={handleFlip}
+                                >
+                                    <QuestionWrapper>
+                                        <h2>
+                                            {
+                                                flashcards[flashcardIndex]
+                                                    .question
+                                            }
+                                        </h2>
+                                    </QuestionWrapper>
+                                    <AnswerWrapper>
+                                        {flipped && (
                                             <h2>
                                                 {
                                                     flashcards[flashcardIndex]
-                                                        .question
+                                                        .answer
                                                 }
                                             </h2>
-                                        </QuestionWrapper>
-                                        <AnswerWrapper>
-                                            {/* Prevent answers from showing on flashcard change */}
-                                            {flipped && (
-                                                <h2>
-                                                    {
-                                                        flashcards[
-                                                            flashcardIndex
-                                                        ].answer
-                                                    }
-                                                </h2>
-                                            )}
-                                        </AnswerWrapper>
-                                    </Flashcard>
+                                        )}
+                                    </AnswerWrapper>
                                 </FlashcardWrapper>
                                 <FlashcardNav>
                                     <Button
